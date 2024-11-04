@@ -11,9 +11,35 @@
     <string name="manage_items">Manage Items</string>
     <string name="continued">continue</string>
 
-    <string-array name="categories_array">
-        <item>Books</item>
-        <item>Movies</item>
+    <string-array name="questions">
+        <item>Do you own or regularly use a car?</item>
+        <item>What type of car do you drive?</item>
+        <item>How many kilometers/miles do you drive per year?</item>
+        <item>How often do you use public transportation (bus, train, subway)?</item>
+        <item>How much time do you spend on public transportation per week (bus, train, subway)?</item>
+        <item> How many short-haul flights (less than 1,500 km / 932 miles) have you taken in the past year?</item>
+        <item>How many long-haul flights (more than 1,500 km / 932 miles) have you taken in the past year?</item>
+        <item>What best describes your diet?</item>
+        <item>How often do you eat beef?</item>
+        <item>How often do you eat pork?</item>
+        <item>How often do you eat chicken?</item>
+        <item>How often do you eat fish or seafood?</item>
+        <item>How often do you waste food or throw away uneaten leftovers?</item>
+        <item>What type of home do you live in?</item>
+        <item>How many people live in your household?</item>
+        <item>What is the size of your home?</item>
+        <item>What type of energy do you use to heat your home?</item>
+        <item>What is your average monthly electricity bill?</item>
+        <item>What type of energy do you use to heat water in your home?</item>
+        <item>Do you use any renewable energy sources for electricity or heating (e.g., solar, wind)?</item>
+        <item>How often do you buy new clothes?</item>
+        <item>Do you buy second-hand or eco-friendly products?</item>
+        <item>How many electronic devices (phones, laptops, etc.) have you purchased in the past year?</item>
+        <item>How often do you recycle?</item>
+    </string-array>
+
+    <string-array name="countries">
+
     </string-array>
 
 
