@@ -9,8 +9,8 @@
         <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="$USER_HOME$/uni/year 2 (2024-2025)/fall 2024/CSCB07/PlanetZe_gp5" />
+            <option value="$USER_HOME$/uni/year 2 (2024-2025)/fall 2024/CSCB07/PlanetZe_gp5/app" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
