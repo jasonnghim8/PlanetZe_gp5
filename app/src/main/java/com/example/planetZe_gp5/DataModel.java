@@ -39,30 +39,33 @@ public class DataModel {
         });
     }
 
+    public void writeData(String path, Object value) {
+        DatabaseReference myRef = db.getReference(path);
+        myRef.setValue(value);
+    }
+
     /**
      * Add an item to the FireBase database.
-     * @param path the path where the item will be added example "users/countries/"
+     * @param path the path where the item will be added example "users/countries/".
      * @param title
      * @param author
-     * @param genre
-     * @param description
      * @return true if and only if item is added.
      */
-    public boolean writeData(String path, String title, String author, String genre, String description) {
+    public boolean writeData(String path, String title, String author) {
         itemsRef = db.getReference(path);
         String id = itemsRef.push().getKey();
         if (id == null) {
             return false;
         }
-        Item item = new Item(id, title, author, genre, description);
+        Item item = new Item(id, title, author);
         itemsRef.child(id).setValue(item);
         return true;
     }
 
     /**
      * Deletes an item. Currently returns true every time.
-     * @param path
-     * @param title
+     * @param path the path in the database.
+     * @param title title of the item to delete.
      * @return true if and only if item is deleted.
      */
     public boolean deleteData(String path, String title) {
@@ -73,7 +76,7 @@ public class DataModel {
                 boolean itemFound = false;
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Item item = snapshot.getValue(Item.class);
-                    if (item != null && item.getTitle().equalsIgnoreCase(title)) {
+                    if (item != null && item.getUser().equalsIgnoreCase(title)) {
                         snapshot.getRef().removeValue();
                         itemFound = true;
                         break;

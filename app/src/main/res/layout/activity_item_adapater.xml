@@ -7,40 +7,23 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/textViewUser"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="User"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewAuthor"
+        android:id="@+id/textViewFootprint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Author"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        android:text="Footprint"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUser" />
 
-    <TextView
-        android:id="@+id/textViewGenre"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Genre"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAuthor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGenre"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

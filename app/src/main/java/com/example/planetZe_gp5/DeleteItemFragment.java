@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class DeleteItemFragment extends Fragment {
-    private EditText editTextTitle;
+    private EditText editTextUser;
     private Spinner spinnerCategory;
     private Button buttonDelete;
     private DataModel dbModel;
@@ -24,7 +24,7 @@ public class DeleteItemFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_delete_item, container, false);
 
-        editTextTitle = view.findViewById(R.id.editTextTitle);
+        editTextUser = view.findViewById(R.id.editTextUser);
         spinnerCategory = view.findViewById(R.id.spinnerCategory);
         buttonDelete = view.findViewById(R.id.buttonDelete);
 
@@ -39,23 +39,23 @@ public class DeleteItemFragment extends Fragment {
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteItemByTitle();
+                deleteItemByUser();
             }
         });
 
         return view;
     }
 
-    private void deleteItemByTitle() {
-        String title = editTextTitle.getText().toString().trim();
+    private void deleteItemByUser() {
+        String user = editTextUser.getText().toString().trim();
         String category = spinnerCategory.getSelectedItem().toString().toLowerCase();
 
-        if (title.isEmpty()) {
-            Toast.makeText(getContext(), "Please enter item title", Toast.LENGTH_SHORT).show();
+        if (user.isEmpty()) {
+            Toast.makeText(getContext(), "Please enter item user", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (dbModel.deleteData("categories/" + category, title)) {
+        if (dbModel.deleteData("categories/" + category, user)) {
             Toast.makeText(getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getContext(), "Failed to delete item", Toast.LENGTH_SHORT).show();

@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class AddItemFragment extends Fragment {
-    private EditText editTextTitle, editTextAuthor, editTextGenre, editTextDescription;
+    private EditText editTextUser, editTextFootprint;
     private Spinner spinnerCategory;
     private Button buttonAdd;
 
@@ -25,10 +25,8 @@ public class AddItemFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_item, container, false);
 
-        editTextTitle = view.findViewById(R.id.editTextTitle);
-        editTextAuthor = view.findViewById(R.id.editTextAuthor);
-        editTextGenre = view.findViewById(R.id.editTextGenre);
-        editTextDescription = view.findViewById(R.id.editTextDescription);
+        editTextUser = view.findViewById(R.id.editTextUser);
+        editTextFootprint = view.findViewById(R.id.editTextFootprint);
         spinnerCategory = view.findViewById(R.id.spinnerCategory);
         buttonAdd = view.findViewById(R.id.buttonAdd);
 
@@ -51,19 +49,17 @@ public class AddItemFragment extends Fragment {
     }
 
     private void addItem() {
-        String title = editTextTitle.getText().toString().trim();
-        String author = editTextAuthor.getText().toString().trim();
-        String genre = editTextGenre.getText().toString().trim();
-        String description = editTextDescription.getText().toString().trim();
+        String user = editTextUser.getText().toString().trim();
+        String footprint = editTextFootprint.getText().toString().trim();
         String category = spinnerCategory.getSelectedItem().toString().toLowerCase();
 
-        if (title.isEmpty() || author.isEmpty() || genre.isEmpty() || description.isEmpty()) {
+        if (user.isEmpty() || footprint.isEmpty()) {
             Toast.makeText(getContext(), "Please fill out all fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
 
-        if (dbModel.writeData("categories/" + category, title, author, genre, description)) {
+        if (dbModel.writeData("categories/" + category, user, footprint)) {
             Toast.makeText(getContext(), "Item added", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getContext(), "Failed to add item", Toast.LENGTH_SHORT).show();
