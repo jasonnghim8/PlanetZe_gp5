@@ -21,8 +21,7 @@ public class AddItemFragment extends Fragment {
     private Spinner spinnerCategory;
     private Button buttonAdd;
 
-    private FirebaseDatabase db;
-    private DatabaseReference itemsRef;
+    private DataModel dbModel;
 
     @Nullable
     @Override
@@ -36,7 +35,7 @@ public class AddItemFragment extends Fragment {
         spinnerCategory = view.findViewById(R.id.spinnerCategory);
         buttonAdd = view.findViewById(R.id.buttonAdd);
 
-        db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
+        dbModel = new DataModel();
 
         // Set up the spinner with categories
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -66,16 +65,11 @@ public class AddItemFragment extends Fragment {
             return;
         }
 
-        itemsRef = db.getReference("categories/" + category);
-        String id = itemsRef.push().getKey();
-        Item item = new Item(id, title, author, genre, description);
 
-        itemsRef.child(id).setValue(item).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Toast.makeText(getContext(), "Item added", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getContext(), "Failed to add item", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (dbModel.writeData("categories/" + category, title, author, genre, description)) {
+            Toast.makeText(getContext(), "Item added", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Failed to add item", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -26,6 +26,7 @@ public class DeleteItemFragment extends Fragment {
 
     private FirebaseDatabase db;
     private DatabaseReference itemsRef;
+    private DataModel dbModel;
 
     @Nullable
     @Override
@@ -36,6 +37,7 @@ public class DeleteItemFragment extends Fragment {
         spinnerCategory = view.findViewById(R.id.spinnerCategory);
         buttonDelete = view.findViewById(R.id.buttonDelete);
 
+        dbModel = new DataModel();
         db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
 
         // Set up the spinner with categories
@@ -63,36 +65,10 @@ public class DeleteItemFragment extends Fragment {
             return;
         }
 
-        itemsRef = db.getReference("categories/" + category);
-        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean itemFound = false;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Item item = snapshot.getValue(Item.class);
-                    if (item != null && item.getTitle().equalsIgnoreCase(title)) {
-                        snapshot.getRef().removeValue().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getContext(), "Failed to delete item", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        itemFound = true;
-                        break;
-                    }
-                }
-                if (!itemFound) {
-                    Toast.makeText(getContext(), "Item not found", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(), "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
+        if (dbModel.deleteData("categories/" + category, title)) {
+            Toast.makeText(getContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getContext(), "Failed to delete item", Toast.LENGTH_SHORT).show();
+        }
     }
 }

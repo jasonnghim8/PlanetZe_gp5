@@ -25,9 +25,7 @@ public class RecyclerViewFragment extends Fragment {
     private ItemAdapter itemAdapter;
     private List<Item> itemList;
     private Spinner spinnerCategory;
-
-    private FirebaseDatabase db;
-    private DatabaseReference itemsRef;
+    private DataModel dbModel;
 
     @Nullable
     @Override
@@ -47,13 +45,13 @@ public class RecyclerViewFragment extends Fragment {
         itemAdapter = new ItemAdapter(itemList);
         recyclerView.setAdapter(itemAdapter);
 
-        db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
+        dbModel = new DataModel();
 
         spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String category = parent.getItemAtPosition(position).toString().toLowerCase();
-                fetchItemsFromDatabase(category);
+                dbModel.readData("categories/" + category, itemList, itemAdapter);
             }
 
             @Override
@@ -63,25 +61,5 @@ public class RecyclerViewFragment extends Fragment {
         });
 
         return view;
-    }
-
-    private void fetchItemsFromDatabase(String category) {
-        itemsRef = db.getReference("categories/" + category);
-        itemsRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                itemList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Item item = snapshot.getValue(Item.class);
-                    itemList.add(item);
-                }
-                itemAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle possible errors
-            }
-        });
     }
 }
