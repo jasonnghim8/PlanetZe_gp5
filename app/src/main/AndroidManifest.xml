@@ -22,7 +22,7 @@
             android:name=".Item2"
             android:exported="false" />
         <activity
-            android:name=".SpinnerFragment"
+            android:name=".SpinnerFragment_Country"
             android:exported="false" />
         <activity
             android:name=".RecyclerViewFragment"
