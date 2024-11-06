@@ -13,19 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 public class DeleteItemFragment extends Fragment {
     private EditText editTextTitle;
     private Spinner spinnerCategory;
     private Button buttonDelete;
-
-    private FirebaseDatabase db;
-    private DatabaseReference itemsRef;
     private DataModel dbModel;
 
     @Nullable
@@ -38,7 +29,6 @@ public class DeleteItemFragment extends Fragment {
         buttonDelete = view.findViewById(R.id.buttonDelete);
 
         dbModel = new DataModel();
-        db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
 
         // Set up the spinner with categories
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
