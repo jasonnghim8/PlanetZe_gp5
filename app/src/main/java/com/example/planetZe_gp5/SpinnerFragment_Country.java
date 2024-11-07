@@ -14,6 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -23,6 +26,11 @@ public class SpinnerFragment_Country extends Fragment {
     private Spinner spinner;
     private Button button;
 
+    private FirebaseDatabase db;
+    private DatabaseReference itemsRef;
+
+    String userId;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -31,6 +39,8 @@ public class SpinnerFragment_Country extends Fragment {
         spinner = view.findViewById(R.id.country_selection);
         message = view.findViewById(R.id.choose_country);
         button = view.findViewById(R.id.country_confirm);
+
+        db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
 
         message.setText(R.string.country_select);
 
@@ -45,6 +55,7 @@ public class SpinnerFragment_Country extends Fragment {
             @Override
             public void onClick(View v){
                 String selected = spinner.getSelectedItem().toString();
+                storeCountry(selected, userId);
             }
         });
 
@@ -66,5 +77,10 @@ public class SpinnerFragment_Country extends Fragment {
         Arrays.sort(sortedCountries);
 
         return new ArrayList<>(Arrays.asList(sortedCountries));
+    }
+
+    private void storeCountry(String country, String user){
+        String parent = "Users";
+        itemsRef.child(parent).child(user).child("location").setValue(country);
     }
 }
