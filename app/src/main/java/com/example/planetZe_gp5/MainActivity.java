@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 //        dbModel.writeData("testDemo/movies", "B07 Demo!");
 
         if (savedInstanceState == null) {
-            loadFragment(new HomeFragment());
+            loadFragment(new StartFragment());
         }
     }
 
