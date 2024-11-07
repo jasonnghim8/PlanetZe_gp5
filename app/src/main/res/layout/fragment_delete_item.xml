@@ -7,19 +7,19 @@
     tools:context=".DeleteItemFragment">
 
     <EditText
-        android:id="@+id/editTextTitle"
+        android:id="@+id/editTextUser"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Item Title"
-        app:layout_constraintTop_toTopOf="parent"
+        android:hint="User name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTitle"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUser"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

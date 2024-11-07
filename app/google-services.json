@@ -1,21 +1,22 @@
 {
   "project_info": {
-    "project_number": "103450168850",
-    "project_id": "b07-demo-summer-2024",
-    "storage_bucket": "b07-demo-summer-2024.appspot.com"
+    "project_number": "116576989251",
+    "firebase_url": "https://planetze--group-5-default-rtdb.firebaseio.com",
+    "project_id": "planetze--group-5",
+    "storage_bucket": "planetze--group-5.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:103450168850:android:18be49669e0000df0552cb",
+        "mobilesdk_app_id": "1:116576989251:android:970909c1ab2ed27c82a4f6",
         "android_client_info": {
-          "package_name": "com.example.b07demosummer2024"
+          "package_name": "com.example.planetZe_gp5"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCNPIMxlsDkuYk5s1-Uycc9s8Hqz2YKIDs"
+          "current_key": "AIzaSyAOPou7L-mp43AYX2vdIrCt5d6k8xJ1hqY"
         }
       ],
       "services": {
