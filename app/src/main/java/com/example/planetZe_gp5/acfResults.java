@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -24,6 +25,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class acfResults extends AppCompatActivity {
-    TextView totalAcf;
+    private TextView totalAcf;
+    private Button cont;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_acftotal);
+
+        totalAcf = this.findViewById(R.id.totalAcf);
+    }
 
 }
