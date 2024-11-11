@@ -1,5 +1,6 @@
 package com.example.planetZe_gp5;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,8 @@ public class SpinnerFragment_Country extends Fragment {
             public void onClick(View v){
                 String selected = spinner.getSelectedItem().toString();
                 storeCountry(selected, userId);
+                Intent intent = new Intent(getActivity(), QnADriver.class);
+                startActivity(intent);
             }
         });
 
