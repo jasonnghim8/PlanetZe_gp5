@@ -46,7 +46,7 @@ public class RecyclerViewFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String category = parent.getItemAtPosition(position).toString().toLowerCase();
-                dbModel.readData("categories/" + category, itemList, itemAdapter);
+                dbModel.readItemData("categories/" + category, itemList, itemAdapter);
             }
 
             @Override

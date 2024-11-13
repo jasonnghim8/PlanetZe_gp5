@@ -8,21 +8,21 @@
     tools:layout_editor_absoluteY="42dp">
 
     <Button
-        android:id="@+id/buttonTrackerView"
+        android:id="@+id/buttonRead"
         android:layout_width="404dp"
         android:layout_height="51dp"
         android:layout_marginTop="216dp"
-        android:text="Eco Tracker"
+        android:text="Read"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonGaugeView"
+        android:id="@+id/buttonShow"
         android:layout_width="404dp"
         android:layout_height="51dp"
         android:layout_marginTop="300dp"
-        android:text="Eco Gauge"
+        android:text="Show"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -19,7 +19,51 @@ public class DataModel {
         db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
     }
 
-    public void readData(String path, List<Item> itemList, ItemAdapter itemAdapter) {
+    /**
+     * store the value of the given path in a list.
+     * @param path the path to a key.
+     * @param list string array list to store the value.
+     */
+    public void readValue(String path, List<String> list) {
+        itemsRef = db.getReference(path);
+        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue().toString();
+                list.add(value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle possible errors
+            }
+        });
+    }
+
+    /**
+     * store values for all keys in list for a given path.
+     * @param path path to key value pairs.
+     * @param list string array list to store the values.
+     */
+    public void readData(String path, List<String> list) {
+        itemsRef = db.getReference(path);
+        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String value = snapshot.getValue().toString();
+                    list.add(value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle possible errors
+            }
+        });
+    }
+
+    public void readItemData(String path, List<Item> itemList, ItemAdapter itemAdapter) {
         itemsRef = db.getReference(path);
         itemsRef.addValueEventListener(new ValueEventListener() {
             @Override
