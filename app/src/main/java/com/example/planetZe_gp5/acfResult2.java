@@ -37,20 +37,18 @@ public class acfResult2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         dbModel = new DataModel();
-        acf = dbModel.readData("Users/"+userId+"/annualCarbonFootprint",
-                );
         setContentView(R.layout.activity_acfresult2);
 
         totalAcf = this.findViewById(R.id.totalAcf);
         String line = R.string.acfResult + Double.toString(acf);
         totalAcf.setText(line);
 
-        cont = findViewById(R.id.acfCont);
-        cont.setOnClickListener(new View.OnClickListener() {
+        cont = this.findViewById(R.id.acfCont);
+        cont.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(acfResult2.this, acfResults.class);
                 startActivity(intent);
             }
         });
-    }
+    }}

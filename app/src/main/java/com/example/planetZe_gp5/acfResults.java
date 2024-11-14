@@ -37,7 +37,8 @@ public class acfResults extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         dbModel = new DataModel();
-        acf = dbModel.readData("Users/"+userId+"/annualCarbonFootprint",
+        List<String>
+        acf = dbModel.readValue("Users/"+userId+"/annualCarbonFootprint",
                 );
         setContentView(R.layout.activity_acftotal);
 

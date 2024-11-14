@@ -12,6 +12,11 @@
     <string name="continued">continue</string>
     <string name="country_select">Please select your country below</string>
     <string name="acfResult">Your Annual Carbon Footprint is:</string>
+    <string name="transport">transportation</string>
+    <string name="food">food</string>
+    <string name="housing">housing</string>
+    <string name="consumption">consumption</string>
+    <string name="acfResult2">Your Annual Carbon Footprint for each category (in tons):</string>
 
 
     <string-array name="questions">
