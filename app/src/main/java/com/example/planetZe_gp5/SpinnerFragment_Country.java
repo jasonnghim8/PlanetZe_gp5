@@ -27,8 +27,7 @@ public class SpinnerFragment_Country extends Fragment {
     private Spinner spinner;
     private Button button;
 
-    private FirebaseDatabase db;
-    private DatabaseReference itemsRef;
+    private DataModel dbModel;
 
     String userId;
 
@@ -41,7 +40,7 @@ public class SpinnerFragment_Country extends Fragment {
         message = view.findViewById(R.id.choose_country);
         button = view.findViewById(R.id.country_confirm);
 
-        db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
+        dbModel = new DataModel();
 
         message.setText(R.string.country_select);
 
@@ -83,7 +82,7 @@ public class SpinnerFragment_Country extends Fragment {
     }
 
     private void storeCountry(String country, String user){
-        String parent = "Users";
-        itemsRef.child(parent).child(user).child("location").setValue(country);
+        String parent = "Users/";
+        dbModel.writeData(parent+userId+"/location", country);
     }
 }

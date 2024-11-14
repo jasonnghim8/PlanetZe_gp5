@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class acfResults extends AppCompatActivity {
+public class acfResult2 extends AppCompatActivity {
     private TextView totalAcf;
     private Button cont;
 
@@ -39,7 +39,7 @@ public class acfResults extends AppCompatActivity {
         dbModel = new DataModel();
         acf = dbModel.readData("Users/"+userId+"/annualCarbonFootprint",
                 );
-        setContentView(R.layout.activity_acftotal);
+        setContentView(R.layout.activity_acfresult2);
 
         totalAcf = this.findViewById(R.id.totalAcf);
         String line = R.string.acfResult + Double.toString(acf);
@@ -49,10 +49,8 @@ public class acfResults extends AppCompatActivity {
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(acfResults.this, acfResult2.class);
+                Intent intent = new Intent(acfResult2.this, acfResults.class);
                 startActivity(intent);
             }
         });
     }
-
-}

@@ -11,6 +11,8 @@
     <string name="manage_items">Manage Items</string>
     <string name="continued">continue</string>
     <string name="country_select">Please select your country below</string>
+    <string name="acfResult">Your Annual Carbon Footprint is:</string>
+
 
     <string-array name="questions">
         <item>Do you own or regularly use a car?</item>

@@ -13,10 +13,10 @@
         tools:layout_editor_absoluteY="60dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/acfCont"
         android:layout_width="147dp"
         android:layout_height="100dp"
-        android:text="Button"
+        android:text="@string/continued"
         tools:layout_editor_absoluteX="238dp"
         tools:layout_editor_absoluteY="578dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
