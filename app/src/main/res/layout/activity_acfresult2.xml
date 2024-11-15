@@ -334,10 +334,11 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/acf2cont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/continued"
+        android:background="@color/dark"
         tools:layout_editor_absoluteX="302dp"
         tools:layout_editor_absoluteY="660dp" />
 
