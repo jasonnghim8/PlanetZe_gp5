@@ -54,6 +54,11 @@ public class acfResult2 extends AppCompatActivity {
         pieChart = findViewById(R.id.piechart);
 
         tvTransport.setText(calculatePercentage(sum, "Transport"));
+        tvFood.setText(calculatePercentage(sum, "Food"));
+        tvHouse.setText(calculatePercentage(sum, "Transport"));
+        tvConsume.setText(calculatePercentage(sum, "Transport"));
+
+        
 
         cont = findViewById(R.id.acf2cont);
         cont.setOnClickListener(new View.OnClickListener(){
