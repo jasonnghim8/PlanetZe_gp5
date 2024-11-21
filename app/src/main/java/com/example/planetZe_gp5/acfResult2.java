@@ -1,5 +1,7 @@
 package com.example.planetZe_gp5;
 
+import static com.example.planetZe_gp5.calculation.calculatePercentage;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,12 +24,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.eazegraph.lib.charts.PieChart;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class acfResult2 extends AppCompatActivity {
-    private TextView totalAcf;
+    private TextView tvTransport, tvFood, tvHouse, tvConsume;
     private Button cont;
+    private PieChart pieChart;
 
     private DataModel dbModel;
     double acf;
@@ -37,13 +44,18 @@ public class acfResult2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         dbModel = new DataModel();
+        HashMap<String, Double> sum;
         setContentView(R.layout.activity_acfresult2);
 
-        totalAcf = this.findViewById(R.id.totalAcf);
-        String line = R.string.acfResult + Double.toString(acf);
-        totalAcf.setText(line);
+        tvTransport = findViewById(R.id.tvTransport);
+        tvFood = findViewById(R.id.tvFood);
+        tvHouse = findViewById(R.id.tvHouse);
+        tvConsume = findViewById(R.id.tvConsume);
+        pieChart = findViewById(R.id.piechart);
 
-        cont = this.findViewById(R.id.acfCont);
+        tvTransport.setText(calculatePercentage(sum, "Transport"));
+
+        cont = findViewById(R.id.acf2cont);
         cont.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

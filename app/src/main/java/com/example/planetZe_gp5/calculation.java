@@ -7,12 +7,19 @@ import java.util.HashMap;
 public class calculation {
     public calculation(){}
 
+    private static DataModel dbModel;
+
     public static double calculateCarbonFootprint(HashMap<String, Integer> input){
         return 0.001 * (calculateTransport(input) + calculateFood(input)
                 + calculateHousing(input) + calculateConsumption(input));
     }
 
-    public static double calculateTransport(HashMap<String, Integer> input){
+    public static double calculatePercentage(@NonNull HashMap<String, Double> input, String type){
+        if (!input.containsKey(type) || !input.containsKey("total")) return 0;
+        return input.get(type)/input.get("total");
+    }
+
+    public static double calculateTransport(@NonNull HashMap<String, Integer> input){
         if (!input.containsKey("carOwn")) return 0;
         double cf = 0; //cf = carbon footprint
         if (input.get("carOwn") == 1){
@@ -23,7 +30,7 @@ public class calculation {
         return cf;
     }
 
-    public static double calculateCar(HashMap<String, Integer> input){
+    public static double calculateCar(@NonNull HashMap<String, Integer> input){
         if (!input.containsKey("carType") || !input.containsKey("driveDistance")){
             return 0;
         }
@@ -36,7 +43,7 @@ public class calculation {
         return ef * input.get("driveDistance");
     }
 
-    public static double calculatePT(HashMap<String, Integer> input){
+    public static double calculatePT(@NonNull HashMap<String, Integer> input){
         if (!input.containsKey("ptTime") || !input.containsKey("ptUsage")){
             return 0;
         }
@@ -145,6 +152,9 @@ public class calculation {
     }
 
     public static double calculateHousing(HashMap<String, Integer> input){
+        if (!input.containsKey("housing")) return 0;
+        dbModel = new DataModel();
+
         return 0;
     }
 

@@ -199,7 +199,7 @@
             <!-- percentage of programming language -->
             <!-- used. For now default set to 0-->
             <TextView
-                android:id="@+id/tvR"
+                android:id="@+id/tvTransport"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -240,7 +240,7 @@
             <!-- For now default set to 0-->
 
             <TextView
-                android:id="@+id/tvPython"
+                android:id="@+id/tvFood"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -280,7 +280,7 @@
             <!-- of programming language used. -->
             <!-- For now default set to 0-->
             <TextView
-                android:id="@+id/tvCPP"
+                android:id="@+id/tvHouse"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -319,7 +319,7 @@
             <!-- of programming language used. -->
             <!-- For now default set to 0-->
             <TextView
-                android:id="@+id/tvJava"
+                android:id="@+id/tvConsume"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

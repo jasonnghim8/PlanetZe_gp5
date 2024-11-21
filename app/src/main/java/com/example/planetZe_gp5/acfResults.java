@@ -29,21 +29,19 @@ public class acfResults extends AppCompatActivity {
     private TextView totalAcf;
     private Button cont;
 
-    private DataModel dbModel;
-    double acf;
     String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        dbModel = new DataModel();
-        List<String>
-        acf = dbModel.readValue("Users/"+userId+"/annualCarbonFootprint",
-                );
+        DataModel dbModel = new DataModel();
+        List<String> acf = new ArrayList<String>();
+        dbModel.readValue("Users/"+userId+"/annualCarbonFootprint",
+                acf);
         setContentView(R.layout.activity_acftotal);
 
         totalAcf = this.findViewById(R.id.totalAcf);
-        String line = R.string.acfResult + Double.toString(acf);
+        String line = R.string.acfResult + acf.get(0);
         totalAcf.setText(line);
 
         cont = findViewById(R.id.acfCont);
