@@ -4,6 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="delete_item">Delete Item</string>
     <string name="add_item">Add Item</string>
+    <string name="next">Next</string>
     <string name="back">Back</string>
     <string name="recyclerview">RecyclerView</string>
     <string name="scroller">Scroller</string>
@@ -11,8 +12,20 @@
     <string name="manage_items">Manage Items</string>
 
     <string-array name="categories_array">
-        <item>Books</item>
-        <item>Movies</item>
+        <item>Personal Vehicle</item>
+        <item>Public Transportation</item>
+        <item>Cycling or Walking</item>
+        <item>Meal</item>
+        <item>Cloth Purchase</item>
+        <item>Electronics Purchase</item>
+        <item>Other Purchases</item>
+        <item>Bills</item>
+    </string-array>
+
+    <string-array name="categories_array2">
+        <item>Electricity</item>
+        <item>Water</item>
+        <item>Gas</item>
     </string-array>
 
 
