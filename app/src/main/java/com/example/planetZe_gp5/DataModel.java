@@ -1,5 +1,7 @@
 package com.example.planetZe_gp5;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -81,6 +83,27 @@ public class DataModel {
                 // Handle possible errors
             }
         });
+    }
+
+    public void searchCorrData(String path, List<Object> list, String key, String object,
+                               String target){
+        itemsRef = db.getReference(path);
+        itemsRef.orderByChild(key).equalTo(object).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot branchSnapshot : snapshot.getChildren()) {
+                            double value = (double) branchSnapshot.child(target).getValue();
+                            list.add(value);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }
+        );
     }
 
     public void writeData(String path, Object value) {

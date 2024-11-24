@@ -5,9 +5,36 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="410dp"
+        android:layout_height="659dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"></LinearLayout>
+        tools:layout_editor_absoluteY="1dp">
+
+        <TextView
+            android:id="@+id/comparison"
+            android:layout_width="match_parent"
+            android:layout_height="226dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/acfresult3"
+            android:layout_width="match_parent"
+            android:layout_height="197dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/globalTargets"
+            android:layout_width="match_parent"
+            android:layout_height="234dp"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/continue3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/continued"
+        tools:layout_editor_absoluteX="308dp"
+        tools:layout_editor_absoluteY="669dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

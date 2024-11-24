@@ -3,6 +3,7 @@ package com.example.planetZe_gp5;
 import static com.example.planetZe_gp5.calculation.calculatePercentage;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,14 +60,25 @@ public class acfResult2 extends AppCompatActivity {
         tvHouse.setText(calculatePercentage(sum, "Transport"));
         tvConsume.setText(calculatePercentage(sum, "Transport"));
 
-        
+        pieChart.addPieSlice(new PieModel(R.string.transport,
+                Integer.parseInt(tvTransport.getText().toString())));
+        Color.parseColor(String.valueOf(R.color.blue));
+
+        pieChart.addPieSlice(new PieModel(R.string.food,
+                Integer.parseInt(tvFood.getText().toString())));
+        Color.parseColor(String.valueOf(R.color.dark_blue));
+
+        pieChart.addPieSlice(new PieModel(R.string.housing,
+                Integer.parseInt(tvHouse.getText().toString())));
+        Color.parseColor(String.valueOf(R.color.dark));
+
+        pieChart.addPieSlice(new PieModel(R.string.consumption,
+                Integer.parseInt(tvConsume.getText().toString())));
+        Color.parseColor(String.valueOf(R.color.grey));
 
         cont = findViewById(R.id.acf2cont);
-        cont.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(acfResult2.this, acfResults.class);
-                startActivity(intent);
-            }
+        cont.setOnClickListener(v -> {
+            Intent intent = new Intent(acfResult2.this, acfResults.class);
+            startActivity(intent);
         });
     }}
