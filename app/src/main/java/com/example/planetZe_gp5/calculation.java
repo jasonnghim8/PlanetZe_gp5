@@ -59,15 +59,12 @@ public class calculation {
         if (!input.containsKey("ptTime") || !input.containsKey("ptUsage")) {
             return 0;
         }
-        int freq = input.get("ptUsage");
-        int time = input.get("ptTime");
         double ef = 0; //ef = emission factor (in kg)
-        switch (freq) {
+        switch (input.get("ptUsage")) {
             case 0:
-                ef = 0;
-                break;
+                return 0;
             case 1:
-                switch (time) {
+                switch (input.get("ptTime")) {
                     case 0:
                         ef = 246;
                         break;
@@ -84,7 +81,7 @@ public class calculation {
                         ef = 4095;
                 }
             default:
-                switch (time) {
+                switch (input.get("ptTime")) {
                     case 0:
                         ef = 573;
                         break;
@@ -231,9 +228,6 @@ public class calculation {
             case 2:
                 return 70.2;
         }
-        if (leftover == 0) return 0;
-        if (leftover == 1) return 23.4;
-        if (leftover == 2) return 70.2;
         return 140.4;
     }
 

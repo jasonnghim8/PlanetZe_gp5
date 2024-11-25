@@ -57,5 +57,7 @@ public class acfResult3 extends AppCompatActivity {
         }
         compare2 = compare2 + " the national average for" + userArea.get(0);
 
+        compare = compare + "\n" + compare2;
+        region.setText(compare);
     }
 }

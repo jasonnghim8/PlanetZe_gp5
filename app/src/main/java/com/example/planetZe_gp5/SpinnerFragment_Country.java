@@ -56,7 +56,7 @@ public class SpinnerFragment_Country extends Fragment {
             public void onClick(View v){
                 String selected = spinner.getSelectedItem().toString();
                 storeCountry(selected, userId);
-                Intent intent = new Intent(getActivity(), QnADriver.class);
+                Intent intent = new Intent(getActivity(), acfResults.class);
                 startActivity(intent);
             }
         });
