@@ -23,6 +23,7 @@ public class StartFragment extends Fragment {
         Button buttonHomeView = view.findViewById(R.id.buttonHomeView);
         Button buttonRead = view.findViewById(R.id.buttonRead);
         Button buttonShow = view.findViewById(R.id.buttonShow);
+        Button ecotracker = view.findViewById(R.id.ecotracker);
 
         DataModel dbModel = new DataModel();
         ArrayList<String> strList1 = new ArrayList<String>();
@@ -55,6 +56,12 @@ public class StartFragment extends Fragment {
                 }
             }
         });
+        ecotracker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new AddItemEcoTrackerFragment());
+            }
+        });
 
         return view;
     }
@@ -66,3 +73,4 @@ public class StartFragment extends Fragment {
         transaction.commit();
     }
 }
+
