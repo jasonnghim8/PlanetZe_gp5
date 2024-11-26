@@ -2,30 +2,16 @@ package com.example.planetZe_gp5;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class acfResults extends AppCompatActivity {
+public class ACFResults extends AppCompatActivity {
     private TextView totalAcf;
     private Button cont;
 
@@ -36,6 +22,8 @@ public class acfResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         DataModel dbModel = new DataModel();
         List<String> acf = new ArrayList<String>();
+        Intent lastPage = getIntent();
+        userId = lastPage.getStringExtra("userid");
         dbModel.readValue("Users/"+userId+"/annualCarbonFootprint",
                 acf);
         setContentView(R.layout.activity_acftotal);
@@ -48,10 +36,16 @@ public class acfResults extends AppCompatActivity {
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(acfResults.this, acfResult2.class);
+                Intent intent = new Intent(ACFResults.this, ACFResult2.class);
+                intent.putExtra("userid", userId);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
     }
 
 }

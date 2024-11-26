@@ -8,24 +8,36 @@
     <TextView
         android:id="@+id/choose_country"
         android:layout_width="150dp"
-        android:layout_height="121dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="117dp"
+        android:layout_marginBottom="29dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="117dp" />
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/country_selection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/country_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="139dp"
         android:text="@string/continued"
-        app:rippleColor="@color/blue"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="544dp" />
+        android:background="@drawable/dark_blue_smooth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/country_selection"
+        app:rippleColor="@color/blue" />
 
     <Spinner
         android:id="@+id/country_selection"
         android:layout_width="195dp"
-        android:layout_height="65dp"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="267dp" />
+        android:layout_height="0dp"
+        android:layout_marginBottom="212dp"
+        app:layout_constraintBottom_toTopOf="@+id/country_confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choose_country" />
 </androidx.constraintlayout.widget.ConstraintLayout>

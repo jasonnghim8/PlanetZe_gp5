@@ -59,7 +59,6 @@ public class StartFragment extends Fragment {
         ecotracker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadFragment(new AddItemEcoTrackerFragment());
             }
         });
 

@@ -12,11 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +52,7 @@ public class SpinnerFragment_Country extends Fragment {
             public void onClick(View v){
                 String selected = spinner.getSelectedItem().toString();
                 storeCountry(selected, userId);
-                Intent intent = new Intent(getActivity(), acfResults.class);
+                Intent intent = new Intent(getActivity(), ACFResults.class);
                 startActivity(intent);
             }
         });

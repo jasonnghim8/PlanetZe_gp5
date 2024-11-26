@@ -1,6 +1,8 @@
 package com.example.planetZe_gp5;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -10,11 +12,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class acfResult3 extends AppCompatActivity {
+public class ACFResults3 extends AppCompatActivity {
     private TextView result, region, global;
     private String userid;
     private DataModel dbModel;
     private Button cont;
+    private Button back;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -26,6 +29,9 @@ public class acfResult3 extends AppCompatActivity {
         region = findViewById(R.id.comparison);
         global = findViewById(R.id.globalTargets);
         cont = findViewById(R.id.continue3);
+
+        Intent lastPage = getIntent();
+        userid = lastPage.getStringExtra("userid");
 
         double cf = 0;
         String cfResult = "Your current carbon footprint is" + cf;
@@ -41,7 +47,7 @@ public class acfResult3 extends AppCompatActivity {
         dbModel.searchCorrData(path, Collections.singletonList(area),
                 "Country", userArea.get(0), "emission");
         double countryCf = area.get(0);
-        String compare = "Your country average is " + countryCf;
+        String compare = "Your country/region average is " + countryCf;
         double diff = countryCf - cf;
         double diffPercent = Math.abs(diff)/countryCf;
 
@@ -59,5 +65,34 @@ public class acfResult3 extends AppCompatActivity {
 
         compare = compare + "\n" + compare2;
         region.setText(compare);
+
+        String compareGb = "The global average is 4.7 tonnes";
+        double diffGb = 4.7 - cf;
+        double diffPercentGb = Math.abs(diffGb)/countryCf;
+
+        String compare3 = "Your carbon footprint is " + diffPercentGb + "% ";
+        if (diffGb == 0){
+            compare3 = compare3 + "equal to";
+        }
+        else if (diffGb < 0) {
+            compare3 = compare3 + "below";
+        }
+        else{
+            compare3 = compare3 + "above";
+        }
+        compare3 = compare3 + " the global average";
+
+        region.setText(compare3);
+
+        back = findViewById(R.id.acf3back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ACFResults3.this, ACFResult2.class);
+                intent.putExtra("userid", userid);
+                intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                startActivity(intent);
+            }
+        });
     }
 }

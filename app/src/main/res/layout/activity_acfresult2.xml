@@ -5,17 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/navy"
-    tools:context=".acfResult2">
+    tools:context=".ACFResult2">
 
     <!-- Card view for displaying the -->
     <!-- Pie chart and details of pie chart -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewGraph"
-        android:layout_width="395dp"
-        android:layout_height="344dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="7dp"
         android:elevation="10dp"
         app:cardCornerRadius="10dp"
-        tools:layout_editor_absoluteX="7dp">
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <!--Linear layout to display pie chart -->
@@ -151,12 +156,16 @@
     <!-- Use of programming languages -->
 
     <LinearLayout
-        android:layout_width="410dp"
-        android:layout_height="312dp"
-        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="4dp"
         android:background="@color/blue"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="344dp">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/acf2cont"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewGraph">
 
         <!--Text view to use of -->
         <!-- programming languages text-->
@@ -165,7 +174,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:text="@string/acfResult2"
             android:textSize="23sp"
@@ -231,8 +240,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
-                android:textColor="@color/black"
                 android:text="@string/food"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <!--Text view to display the percentage -->
@@ -283,7 +292,7 @@
                 android:id="@+id/tvHouse"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:fontFamily="sans-serif-light"
                 android:text="0"
                 android:textAlignment="textEnd"
@@ -322,7 +331,7 @@
                 android:id="@+id/tvConsume"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:fontFamily="sans-serif-light"
                 android:text="0"
                 android:textAlignment="textEnd"
@@ -337,10 +346,26 @@
         android:id="@+id/acf2cont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="23dp"
+        android:background="@drawable/dark_blue_smooth"
         android:text="@string/continued"
-        android:background="@color/dark"
-        tools:layout_editor_absoluteX="302dp"
-        tools:layout_editor_absoluteY="660dp" />
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+    <Button
+        android:id="@+id/acf2back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="23dp"
+        android:background="@drawable/dark_blue_smooth"
+        android:text="@string/back"
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

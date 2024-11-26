@@ -10,34 +10,51 @@ public class calculation {
     public calculation() {
     }
 
-    private static DataModel dbModel;
+    private  DataModel dbModel;
 
-    public static double calculateCarbonFootprint(HashMap<String, Integer> input) {
-        return 0.001 * (calculateTransport(input) + calculateFood(input)
+    String userid;
+    public calculation(String userid){
+        this.userid = userid;
+        dbModel = new DataModel();
+    }
+    public  double calculateCarbonFootprint(HashMap<Integer, Integer> input) {
+        double cf = (calculateTransport(input) + calculateFood(input)
                 + calculateHousing(input) + calculateConsumption(input));
+        String path = "/Users/" + userid + "/annualCarbonFootprint";
+        dbModel.writeData(path, cf);
+        return cf;
     }
 
-    public static double calculatePercentage(@NonNull HashMap<String, Double> input, String type) {
-        if (!input.containsKey(type) || !input.containsKey("total")) return 0;
-        return input.get(type) / input.get("total");
+    public  double calculatePercentage(String type) {
+        String path = "/Users/" + userid + "/annualCarbonFootprint/" + type;
+        String pathTotal = "/Users/" + userid + "/annualCarbonFootprint";
+        List<String> types = new ArrayList<String>();
+        dbModel.readData(path, types);
+        dbModel.readData(pathTotal, types);
+        double typeData = Double.parseDouble(types.get(0));
+        double total = Double.parseDouble(types.get(1));
+        return typeData/total;
     }
 
-    public static double calculateTransport(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("carOwn")) return 0;
+    public  double calculateTransport(@NonNull HashMap<Integer, Integer> input) {
+        if (!input.containsKey(1)) return 0;
         double cf = 0; //cf = carbon footprint
-        if (input.get("carOwn") == 1) {
+        if (input.get(1) == 1) {
             cf += calculateCar(input);
         }
         cf += calculatePT(input);
         cf += calculateFlight(input);
+        String path = "/Users/" + userid + "/annualCarbonFootprint/transportation";
+        cf = cf * 0.001;
+        dbModel.writeData(path, cf);
         return cf;
     }
 
-    public static double calculateCar(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("carType") || !input.containsKey("driveDistance")) {
+    public  double calculateCar(@NonNull HashMap<Integer, Integer> input) {
+        if (!input.containsKey(2) || !input.containsKey(3)) {
             return 0;
         }
-        int carType = input.get("carType");
+        int carType = input.get(2);
         double ef = 0; //ef = emission factor
         switch (carType) {
             case 1:
@@ -52,46 +69,46 @@ public class calculation {
             default:
                 ef = 0.05;
         }
-        return ef * input.get("driveDistance");
+        return ef * input.get(3);
     }
 
-    public static double calculatePT(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("ptTime") || !input.containsKey("ptUsage")) {
+    public  double calculatePT(@NonNull HashMap<Integer, Integer> input) {
+        if (!input.containsKey(5) || !input.containsKey(4)) {
             return 0;
         }
         double ef = 0; //ef = emission factor (in kg)
-        switch (input.get("ptUsage")) {
+        switch (input.get(5)) {
             case 0:
                 return 0;
             case 1:
-                switch (input.get("ptTime")) {
-                    case 0:
+                switch (input.get(4)) {
+                    case 1:
                         ef = 246;
                         break;
-                    case 1:
+                    case 2:
                         ef = 819;
                         break;
                     case 3:
                         ef = 1638;
                         break;
-                    case 5:
+                    case 4:
                         ef = 3071;
                         break;
                     default:
                         ef = 4095;
                 }
             default:
-                switch (input.get("ptTime")) {
-                    case 0:
+                switch (input.get(4)) {
+                    case 1:
                         ef = 573;
                         break;
-                    case 1:
+                    case 2:
                         ef = 1911;
                         break;
                     case 3:
                         ef = 3822;
                         break;
-                    case 5:
+                    case 4:
                         ef = 7166;
                         break;
                     default:
@@ -101,22 +118,22 @@ public class calculation {
         return ef;
     }
 
-    public static double calculateFlight(HashMap<String, Integer> input) {
-        if (!input.containsKey("lh") || !input.containsKey("sh")) {
+    public  double calculateFlight(HashMap<Integer, Integer> input) {
+        if (!input.containsKey(7) || !input.containsKey(6)) {
             return 0;
         }
-        int lh = input.get("lh");
-        int sh = input.get("sh");
+        int lh = input.get(7);
+        int sh = input.get(6);
         double ef = 0; //ef = emission factor
 
         switch (sh) {
             case 1:
                 ef += 225;
                 break;
-            case 3:
+            case 2:
                 ef += 600;
                 break;
-            case 6:
+            case 3:
                 ef += 1200;
                 break;
             default:
@@ -127,10 +144,10 @@ public class calculation {
             case 1:
                 ef += 825;
                 break;
-            case 3:
+            case 2:
                 ef += 2200;
                 break;
-            case 6:
+            case 3:
                 ef += 4400;
                 break;
             default:
@@ -139,87 +156,91 @@ public class calculation {
         return ef;
     }
 
-    public static double calculateFood(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("dietType")) {
+    public  double calculateFood(@NonNull HashMap<Integer, Integer> input) {
+        if (!input.containsKey(8)) {
             return 0;
         }
-        int diet = input.get("dietType");
+        int diet = input.get(8);
         // pls switch the order of vegetarian and vegan for simplicity
         if (diet < 4) return 500 * diet + calculateLeftover(input);
-        return calculateBeef(input) + calculatePork(input) +
+        double cf = calculateBeef(input) + calculatePork(input) +
                 calculateChicken(input) + calculateSeafood(input) +
                 calculateLeftover(input);
+        cf = cf * 0.001;
+        String path = "/Users/" + userid + "/annualCarbonFootprint/Food";
+        dbModel.writeData(path, cf);
+        return cf;
     }
 
-    public static double calculateBeef(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("beef")) {
+    public  double calculateBeef(@NonNull HashMap<Integer, Integer> input) {
+        if (!input.containsKey(9)) {
             return 0;
         }
-        int beef = input.get("beef");
+        int beef = input.get(9);
         switch (beef) {
             case 0:
                 return 0;
             case 1:
                 return 1300;
-            case 3:
+            case 2:
                 return 1900;
         }
         return 2500;
     }
 
-    public static double calculateChicken(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("chicken")) {
+    public  double calculateChicken(@NonNull HashMap<Integer, Integer> input) {
+        if (!input.containsKey(10)) {
             return 0;
         }
-        int chick = input.get("chicken");
+        int chick = input.get(10);
         switch (chick) {
             case 0:
                 return 0;
             case 1:
                 return 450;
-            case 3:
+            case 2:
                 return 860;
         }
         return 1450;
     }
 
-    public static double calculatePork(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("pork")) {
+    public  double calculatePork(@NonNull HashMap<Integer, Integer> input) {
+        if (!input.containsKey(11)) {
             return 0;
         }
-        int pork = input.get("pork");
+        int pork = input.get(11);
         switch (pork) {
             case 0:
                 return 0;
             case 1:
                 return 200;
-            case 3:
+            case 2:
                 return 600;
         }
         return 950;
     }
 
-    public static double calculateSeafood(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("seafood")) {
+    public  double calculateSeafood(@NonNull HashMap<Integer, Integer> input) {
+        if (!input.containsKey(12)) {
             return 0;
         }
-        int seafood = input.get("seafood");
+        int seafood = input.get(12);
         switch (seafood) {
             case 0:
                 return 0;
             case 1:
                 return 150;
-            case 3:
+            case 2:
                 return 500;
         }
         return 800;
     }
 
-    public static double calculateLeftover(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("leftover")) {
+    public  double calculateLeftover(@NonNull HashMap<Integer, Integer> input) {
+        if (!input.containsKey(13)) {
             return 0;
         }
-        int leftover = input.get("leftover");
+        int leftover = input.get(13);
         switch (leftover) {
             case 0:
                 return 0;
@@ -231,18 +252,18 @@ public class calculation {
         return 140.4;
     }
 
-    public static double calculateHousing(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("homeType")) return 0;
+    public  double calculateHousing(@NonNull HashMap<Integer, Integer> input) {
+        if (!input.containsKey(14)) return 0;
         dbModel = new DataModel();
         List<String> ef = new ArrayList<String>();
-        int type = input.get("homeType");
+        int type = input.get(14);
         if (type == 5) type = 3;
-        int ppl = input.getOrDefault("homePplNo", 1);
-        int size = input.getOrDefault("homeSize", 1);
-        int homeEnergy = input.getOrDefault("heatEnergyType", 1);
-        int bill = input.getOrDefault("monthElectricBill", 1);
-        int waterHeat = input.getOrDefault("waterHeatEnergyType", 1);
-        int renew = input.getOrDefault("renewEnergy", 3);
+        int ppl = input.getOrDefault(15, 1);
+        int size = input.getOrDefault(16, 1);
+        int homeEnergy = input.getOrDefault(17, 1);
+        int bill = input.getOrDefault(18, 1);
+        int waterHeat = input.getOrDefault(19, 1);
+        int renew = input.getOrDefault(20, 3);
         int id = (type - 1) * 300;
         id += (ppl - 1) * 25;
         id += (size - 1) * 100;
@@ -251,28 +272,34 @@ public class calculation {
         String path = "Housing_data/" + id;
         dbModel.readValue(path, ef);
 
-        int cf = Integer.parseInt(ef.get(0));
+        double cf = Double.parseDouble(ef.get(0));
         if (homeEnergy != waterHeat) cf += 233;
         if (renew == 1) cf -= 6000;
         else if (renew == 2) cf -= 4000;
+        cf = cf * 0.001;
+        String path2 = "/Users/" + userid + "/annualCarbonFootprint/Housing";
+        dbModel.writeData(path2, cf);
         return cf;
     }
 
-    public static double calculateConsumption(@NonNull HashMap<String, Integer> input) {
-        int clothes = input.getOrDefault("newClothesFreq", 4);
-        int eco = input.getOrDefault("ecofriendly", 3);
-        int device = input.getOrDefault("devicePurchase", 1);
-        int recycle = input.getOrDefault("recycleFreq", 1);
+    public  double calculateConsumption(@NonNull HashMap<Integer, Integer> input) {
+        int clothes = input.getOrDefault(21, 4);
+        int eco = input.getOrDefault(22, 3);
+        int device = input.getOrDefault(23, 1);
+        int recycle = input.getOrDefault(24, 1);
         double cf = 0;
         cf += calculateClothes(clothes);
         if (eco == 1) cf = cf/2;
         else if (eco == 2) cf = cf * 0.7;
         cf += calculateDevice(device);
         cf -= calculateRecycle(recycle, clothes, device);
+        cf = cf * 0.001;
+        String path = "/Users/" + userid + "/annualCarbonFootprint/Consumption";
+        dbModel.writeData(path, cf);
         return cf;
     }
 
-    public static double calculateClothes(int ans) {
+    public  double calculateClothes(int ans) {
         switch (ans) {
             case 1:
                 return 360;
@@ -284,7 +311,7 @@ public class calculation {
         return 5;
     }
 
-    public static double calculateDevice(int ans){
+    public  double calculateDevice(int ans){
         switch (ans){
             case 1:
                 return 0;
@@ -298,7 +325,7 @@ public class calculation {
         return 1200;
     }
 
-    public static double calculateRecycle(int ans, int freq, int device){
+    public  double calculateRecycle(int ans, int freq, int device){
         if (ans == 1) return 0;
         double cf = 0;
         switch (ans){
