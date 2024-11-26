@@ -1,5 +1,6 @@
 package com.example.planetZe_gp5;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ public class ACFQuestion extends AppCompatActivity {
     private int currentQuestionIndex = 1; // question number: start with 1
     private HashMap<Integer, Integer> selectedAnswers = new HashMap<>(); // Saved all selected answers
     private ACFQButtonHandler buttonHandler; // Instance of ACFQButtonHandler
+    private String userid;
 
     private final String[] questions = QnA.question; //calling question from another document
     private final String[][] answers = QnA.answer; //calling answer from another document
@@ -26,12 +28,20 @@ public class ACFQuestion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acfquestion);
 
+        Intent intent = getIntent();
+        userid = intent.getStringExtra("userid");
+
         questionTextView = findViewById(R.id.question_text);
         buttonContainer = findViewById(R.id.answer_buttons_container);
 
-        buttonHandler = new ACFQButtonHandler(); // specified handler only for this document
+        buttonHandler = new ACFQButtonHandler(userid); // specified handler only for this document
 
         Question(); //starting another question
+
+        // continue after all questions answered
+        Intent cont = new Intent(ACFQuestion.this, ACFResults.class);
+        cont.putExtra("userid", userid);
+        startActivity(cont);
     }
 
     private void Question() {

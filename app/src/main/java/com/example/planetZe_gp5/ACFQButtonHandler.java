@@ -11,10 +11,12 @@ public class ACFQButtonHandler {
 
     private FirebaseDatabase db;
     private DatabaseReference answersRef;
+    private String userid;
 
-    public ACFQButtonHandler() {
+    public ACFQButtonHandler(String id) {
+        this.userid = id;
         db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
-        answersRef = db.getReference("answers");
+        answersRef = db.getReference("Users/" + userid + "/annualCarbonFootprint");
     }
 
     public void saveAllAnswersToFirebase(Context context, HashMap<Integer, Integer> selectedAnswers) {

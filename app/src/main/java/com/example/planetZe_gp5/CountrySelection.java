@@ -1,18 +1,13 @@
 package com.example.planetZe_gp5;
 
-import static android.app.PendingIntent.getActivity;
-import static java.security.AccessController.getContext;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,15 +43,12 @@ public class CountrySelection extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                String selected = spinner.getSelectedItem().toString();
-                storeCountry(selected, userid);
-                Intent intent = new Intent(CountrySelection.this, ACFResults.class);
-                intent.putExtra("userid", userid);
-                startActivity(intent);
-            }
+        button.setOnClickListener(v -> {
+            String selected = spinner.getSelectedItem().toString();
+            storeCountry(selected);
+            Intent intent1 = new Intent(CountrySelection.this, ACFQuestion.class);
+            intent1.putExtra("userid", userid);
+            startActivity(intent1);
         });
     }
     private ArrayList<String> getCountriesList(){
@@ -76,7 +68,7 @@ public class CountrySelection extends AppCompatActivity {
         return new ArrayList<>(Arrays.asList(sortedCountries));
     }
 
-    private void storeCountry(String country, String user){
+    private void storeCountry(String country){
         String parent = "Users/";
         dbModel.writeData(parent+userid+"/location", country);
     }
