@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,6 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 public class DataModel {
     private final FirebaseDatabase db;
@@ -21,7 +24,7 @@ public class DataModel {
     private String values = " ";
 
     public DataModel() {
-        db = FirebaseDatabase.getInstance();
+        db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
     }
 
     /**
@@ -36,6 +39,8 @@ public class DataModel {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue().toString();
                 list.add(value);
+                if (value != null) Log.d("FirebaseData", "data get");
+                else Log.d("FirebaseData", "data failed");
             }
 
             @Override
@@ -47,28 +52,33 @@ public class DataModel {
 
     public void readValue2(String path, List<String> data) {
         itemsRef = db.getReference(path);
-        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                data.clear();
-                String value = dataSnapshot.getValue(String.class);
-                if (value != null){
+        final CountDownLatch latch = new CountDownLatch(1);
+
+        itemsRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DataSnapshot snapshot = task.getResult();
+                if (snapshot.exists()){
+                    String value = snapshot.getValue().toString();
                     data.add(value);
-                    Log.d("readData", "Value added:" + value);
+                    Log.d("getData", "Value" + value);
                 }
                 else{
-                    Log.d("readData", "Null encountered");
+                    Log.d("getData", "Data unfounded");
                 }
-
+                latch.countDown();
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle possible errors
-                Log.e("readData", "error");
-                data.add("0");
+            else {
+                Log.e("getData", "Error" + task.getException().getMessage());
             }
         });
+
+
+        try {
+            latch.await();
+        } catch (InterruptedException e){
+            Log.e("Data", "Latch interrupted", e);
+        }
+
     }
 
     public String getValues(){

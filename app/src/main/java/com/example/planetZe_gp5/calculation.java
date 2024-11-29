@@ -20,7 +20,7 @@ public class calculation {
     public void calculateCarbonFootprint(HashMap<String, Integer> input) {
         double cf = (calculateTransport(input) + calculateFood(input)
                 + calculateHousing(input) + calculateConsumption(input));
-        String path = "Users/" + userid + "/annualCarbonFootprint";
+        String path = "Users/" + userid + "/annualCarbonFootprint/total";
         dbModel.writeData(path, cf);
     }
 
@@ -28,8 +28,8 @@ public class calculation {
         String path = "Users/" + userid + "/annualCarbonFootprint/" + type;
         String pathTotal = "Users/" + userid + "/annualCarbonFootprint/total";
         List<String> types = new ArrayList<String>();
-        dbModel.readValue2(path, types);
-        dbModel.readValue2(pathTotal, types);
+        dbModel.readValue(path, types);
+        dbModel.readValue(pathTotal, types);
         double typeData = Double.parseDouble(types.get(0));
         double total = Double.parseDouble(types.get(1));
         return typeData/total;
@@ -274,9 +274,10 @@ public class calculation {
         id += (homeEnergy - 1);
         id += (bill - 1) * 5;
         String path = "Housing_data/" + id;
-        dbModel.readValue2(path, ef);
+        dbModel.readValue(path, ef);
 
         double cf = Double.parseDouble(ef.get(0));
+        // double cf = 0;
         if (homeEnergy != waterHeat) cf += 233;
         if (renew == 1) cf -= 6000;
         else if (renew == 2) cf -= 4000;

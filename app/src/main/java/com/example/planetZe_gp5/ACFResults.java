@@ -22,17 +22,18 @@ public class ACFResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         DataModel dbModel = new DataModel();
         List<String> acf = new ArrayList<>();
-        acf.add("");
+        // acf.add("");
 
         Intent lastPage = getIntent();
         userId = lastPage.getStringExtra("userid");
         if (userId == null) userId = "test";
-        dbModel.readValue2("Users/"+userId+"/annualCarbonFootprint/total",
-                acf);
+        dbModel.readValue2("Users/"+userId + "annualCarbonFootprint/total",
+                 acf);
+        // dbModel.readValue2("testDemo/movies", acf);
         setContentView(R.layout.activity_acftotal);
 
         totalAcf = this.findViewById(R.id.totalAcf);
-        String line = getResources().getString(R.string.acfResult) + acf.get(0);
+        String line = getResources().getString(R.string.acfResult) + acf.get(0) + " tonnes";
         totalAcf.setText(line);
 
         cont = findViewById(R.id.acfCont);
