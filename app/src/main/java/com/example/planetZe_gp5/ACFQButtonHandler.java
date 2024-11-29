@@ -16,13 +16,13 @@ public class ACFQButtonHandler {
     public ACFQButtonHandler(String id) {
         this.userid = id;
         db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
-        answersRef = db.getReference("Users/" + userid + "/annualCarbonFootprint");
+        answersRef = db.getReference("Users/" + userid);
     }
 
-    public void saveAllAnswersToFirebase(Context context, HashMap<Integer, Integer> selectedAnswers) {
+    public void saveAllAnswersToFirebase(Context context, HashMap<String, Integer> selectedAnswers) {
         String key = answersRef.push().getKey();
         if (key != null) {
-            answersRef.child(key).setValue(selectedAnswers).addOnCompleteListener(task -> {
+            answersRef.child("annualCarbonFootprint").setValue(selectedAnswers).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(context, "All answers saved successfully!", Toast.LENGTH_SHORT).show();
                 } else {

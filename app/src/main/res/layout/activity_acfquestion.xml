@@ -15,21 +15,21 @@
         <TextView
             android:id="@+id/question_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Question will be displayed here"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:textStyle="bold"
+            android:layout_height="181dp"
+            android:layout_marginBottom="24dp"
             android:gravity="center"
             android:padding="16dp"
-            android:layout_marginBottom="24dp" />
+            android:text="Question will be displayed here"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <!-- Answer Buttons Container -->
         <LinearLayout
             android:id="@+id/answer_buttons_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal" />
+            android:layout_height="368dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" />
     </LinearLayout>
 </ScrollView>

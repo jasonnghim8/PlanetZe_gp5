@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataModel {
@@ -17,8 +18,10 @@ public class DataModel {
 
     private DatabaseReference itemsRef;
 
+    private String values = " ";
+
     public DataModel() {
-        db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
+        db = FirebaseDatabase.getInstance();
     }
 
     /**
@@ -42,6 +45,36 @@ public class DataModel {
         });
     }
 
+    public void readValue2(String path, List<String> data) {
+        itemsRef = db.getReference(path);
+        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                data.clear();
+                String value = dataSnapshot.getValue(String.class);
+                if (value != null){
+                    data.add(value);
+                    Log.d("readData", "Value added:" + value);
+                }
+                else{
+                    Log.d("readData", "Null encountered");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors
+                Log.e("readData", "error");
+                data.add("0");
+            }
+        });
+    }
+
+    public String getValues(){
+        return values;
+    }
+
     /**
      * store values for all keys in list for a given path.
      * @param path path to key value pairs.
@@ -51,7 +84,7 @@ public class DataModel {
         itemsRef = db.getReference(path);
         itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String value = snapshot.getValue().toString();
                     list.add(value);
@@ -61,6 +94,7 @@ public class DataModel {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Handle possible errors
+                list.add("0");
             }
         });
     }
@@ -85,6 +119,11 @@ public class DataModel {
         });
     }
 
+    /**
+     * store values for key "target" in list that has the same value of "object" for key "key.
+     * @param path path to key value pairs.
+     * @param list string array list to store the values.
+     */
     public void searchCorrData(String path, List<Object> list, String key, String object,
                                String target){
         itemsRef = db.getReference(path);

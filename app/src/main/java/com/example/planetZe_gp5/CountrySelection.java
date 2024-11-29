@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class CountrySelection extends AppCompatActivity {
@@ -26,6 +28,7 @@ public class CountrySelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
+        if (userid == null) userid = "test";
         setContentView(R.layout.activity_country_selection);
 
         spinner = findViewById(R.id.country_selection);
@@ -33,8 +36,12 @@ public class CountrySelection extends AppCompatActivity {
         button = findViewById(R.id.country_confirm);
 
         dbModel = new DataModel();
+        List<String> a = new ArrayList<>();
+        dbModel.readValue2("Users/"+userid+"/location", a);
+
 
         message.setText(R.string.country_select);
+        // message.setText(a.get(0));
 
         ArrayList<String> countries = getCountriesList();
 

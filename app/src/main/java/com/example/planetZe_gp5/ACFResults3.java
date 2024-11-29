@@ -32,6 +32,7 @@ public class ACFResults3 extends AppCompatActivity {
 
         Intent lastPage = getIntent();
         userid = lastPage.getStringExtra("userid");
+        if (userid == null) userid = "test";
 
         double cf = 0;
         String cfResult = "Your current carbon footprint is" + cf;
@@ -66,8 +67,8 @@ public class ACFResults3 extends AppCompatActivity {
         compare = compare + "\n" + compare2;
         region.setText(compare);
 
-        String compareGb = "The global average is 4.7 tonnes";
-        double diffGb = 4.7 - cf;
+        String compareGb = "The global average is 2 tonnes";
+        double diffGb = 2 - cf;
         double diffPercentGb = Math.abs(diffGb)/countryCf;
 
         String compare3 = "Your carbon footprint is " + diffPercentGb + "% ";
@@ -83,6 +84,14 @@ public class ACFResults3 extends AppCompatActivity {
         compare3 = compare3 + " the global average";
 
         region.setText(compare3);
+
+        cont = findViewById(R.id.continue3);
+        cont.setOnClickListener(v -> {
+            Intent intent = new Intent(ACFResults3.this, MainActivity.class);
+            intent.putExtra("userid", userid);
+            intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+            startActivity(intent);
+        });
 
         back = findViewById(R.id.acf3back);
         back.setOnClickListener(new View.OnClickListener() {

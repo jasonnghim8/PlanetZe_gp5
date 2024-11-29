@@ -16,7 +16,7 @@ public class ACFQuestion extends AppCompatActivity {
     private TextView questionTextView;
     private LinearLayout buttonContainer;
     private int currentQuestionIndex = 1; // question number: start with 1
-    private HashMap<Integer, Integer> selectedAnswers = new HashMap<>(); // Saved all selected answers
+    private HashMap<String, Integer> selectedAnswers = new HashMap<>(); // Saved all selected answers
     private ACFQButtonHandler buttonHandler; // Instance of ACFQButtonHandler
     private String userid;
 
@@ -30,6 +30,7 @@ public class ACFQuestion extends AppCompatActivity {
 
         Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
+        if (userid == null) userid = "test";
 
         questionTextView = findViewById(R.id.question_text);
         buttonContainer = findViewById(R.id.answer_buttons_container);
@@ -37,11 +38,6 @@ public class ACFQuestion extends AppCompatActivity {
         buttonHandler = new ACFQButtonHandler(userid); // specified handler only for this document
 
         Question(); //starting another question
-
-        // continue after all questions answered
-        Intent cont = new Intent(ACFQuestion.this, ACFResults.class);
-        cont.putExtra("userid", userid);
-        startActivity(cont);
     }
 
     private void Question() {
@@ -64,7 +60,8 @@ public class ACFQuestion extends AppCompatActivity {
 
             int currentButtonNumber = buttonNumber;
             button.setOnClickListener(v -> {
-                selectedAnswers.put(currentQuestionIndex, currentButtonNumber); // puting key as question number and value as button number count from above
+                selectedAnswers.put(Integer.toString(currentQuestionIndex), currentButtonNumber);
+                // putting key as question number and value as button number count from above
 
                 if (currentQuestionIndex == 1 && currentButtonNumber == 2) {
                     currentQuestionIndex = 4; // Jump to question 4
@@ -74,8 +71,14 @@ public class ACFQuestion extends AppCompatActivity {
                     currentQuestionIndex++; // avoid crash on exceeding length of question
                 } else {
                     buttonHandler.saveAllAnswersToFirebase(this, selectedAnswers);
-                    finish(); // stop quiz, will be changed due to merging document
-                    return;
+                    // finish();
+                    // continue after all questions answered
+                    calculation save = new calculation(userid);
+                    save.calculateCarbonFootprint(selectedAnswers);
+                    Intent cont = new Intent(ACFQuestion.this, ACFResults.class);
+                    cont.putExtra("userid", userid);
+                    startActivity(cont);
+                    // return;
                 }
 
                 Question();

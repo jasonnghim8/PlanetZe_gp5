@@ -35,6 +35,7 @@ public class ACFResult2 extends AppCompatActivity {
 
         Intent lastPage = getIntent();
         userId = lastPage.getStringExtra("userid");
+        if (userId == null) userId = "test";
         calculation cal = new calculation(userId);
 
         tvTransport.setText(String.valueOf(cal.calculatePercentage("Transport")));
