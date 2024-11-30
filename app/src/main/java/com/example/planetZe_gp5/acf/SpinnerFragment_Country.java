@@ -28,7 +28,6 @@ public class SpinnerFragment_Country extends Fragment {
 
     private DataModel dbModel;
 
-    String userId;
 
     @Nullable
     @Override

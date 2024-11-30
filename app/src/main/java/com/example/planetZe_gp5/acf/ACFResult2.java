@@ -34,7 +34,7 @@ public class ACFResult2 extends AppCompatActivity {
         Intent lastPage = getIntent();
         userId = lastPage.getStringExtra("userid");
         if (userId == null) userId = "test";
-        Calculation cal = Calculation.getInstance(userId);
+        Calculation cal = Calculation.getInstance();
 
         tvTransport.setText(String.valueOf(cal.transportCF/cal.totalCF));
         tvFood.setText(String.valueOf(cal.foodCF/cal.totalCF));
@@ -57,7 +57,6 @@ public class ACFResult2 extends AppCompatActivity {
         cont = findViewById(R.id.acf2cont);
         cont.setOnClickListener(v -> {
             Intent intent = new Intent(ACFResult2.this, ACFResults3.class);
-            intent.putExtra("userid", userId);
             intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
             startActivity(intent);
         });

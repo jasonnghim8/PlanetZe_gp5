@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.planetZe_gp5.LocalData;
 import com.example.planetZe_gp5.R;
 import com.google.android.material.chip.Chip;
 
@@ -30,7 +31,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = itemList.get(position);
-        holder.text.setText(EcoTrackerData.getKeyString(item.key));
+        holder.text.setText(LocalData.ETGetString(item.key));
         holder.value.setText(item.value);
         holder.value.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 

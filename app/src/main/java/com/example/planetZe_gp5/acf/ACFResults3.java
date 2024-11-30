@@ -9,12 +9,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planetZe_gp5.DataModel;
+import com.example.planetZe_gp5.LocalData;
 import com.example.planetZe_gp5.Observer;
 import com.example.planetZe_gp5.R;
 
 public class ACFResults3 extends AppCompatActivity implements Observer {
     private TextView result, region, global;
-    private String userid;
     private DataModel dbModel;
     private Button cont;
     private Button back;
@@ -33,16 +33,11 @@ public class ACFResults3 extends AppCompatActivity implements Observer {
         cont = findViewById(R.id.continue3);
         back = findViewById(R.id.acf3back);
 
-        Intent lastPage = getIntent();
-        userid = lastPage.getStringExtra("userid");
-        if (userid == null) userid = "test";
-
-        String path = "Users/" + userid + "/location";
+        String path = "Users/" + LocalData.userid + "/location";
         dbModel.readValue(path, this);
 
         cont.setOnClickListener(v -> {
             Intent intent = new Intent(ACFResults3.this, CountrySelection.class);
-            intent.putExtra("userid", userid);
             intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
             startActivity(intent);
         });
@@ -51,7 +46,6 @@ public class ACFResults3 extends AppCompatActivity implements Observer {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ACFResults3.this, ACFResult2.class);
-                intent.putExtra("userid", userid);
                 intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 startActivity(intent);
             }

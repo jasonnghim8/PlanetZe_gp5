@@ -15,16 +15,14 @@ public class Calculation implements Observer {
     public double consumptionCF;
     public double totalCF;
     private DataModel dbModel;
-    public String userid;
 
-    private Calculation(String userid){
-        this.userid = userid;
+    private Calculation(){
         dbModel = DataModel.getInstance();
     }
 
-    public static Calculation getInstance(String userid) {
+    public static Calculation getInstance() {
         if (instance == null) {
-            instance = new Calculation(userid);
+            instance = new Calculation();
         }
         return instance;
     }

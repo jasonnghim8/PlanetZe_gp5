@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planetZe_gp5.DataModel;
-import com.example.planetZe_gp5.QnA;
+import com.example.planetZe_gp5.LocalData;
 import com.example.planetZe_gp5.R;
 
 import java.util.HashMap;
@@ -25,8 +25,8 @@ public class ACFQuestion extends AppCompatActivity {
     private HashMap<String, Integer> selectedAnswers = new HashMap<>(); // Saved all selected answers
     private String userid;
 
-    private final String[] questions = QnA.question; //calling question from another document
-    private final String[][] answers = QnA.answer; //calling answer from another document
+    private final String[] questions = LocalData.ACFquestion; //calling question from another document
+    private final String[][] answers = LocalData.ACFanswer; //calling answer from another document
     private DataModel dbModel;
 
     @Override
@@ -79,7 +79,7 @@ public class ACFQuestion extends AppCompatActivity {
                     dbModel.writeUserData("annualCarbonFootprint", selectedAnswers);
                     Toast.makeText(this, "All answers saved successfully!", Toast.LENGTH_SHORT).show();
                     // continue after all questions answered
-                    Calculation save = Calculation.getInstance(userid);
+                    Calculation save = Calculation.getInstance();
                     save.calculateCarbonFootprint(selectedAnswers);
                     Intent cont = new Intent(ACFQuestion.this, ACFResults.class);
                     cont.putExtra("userid", userid);

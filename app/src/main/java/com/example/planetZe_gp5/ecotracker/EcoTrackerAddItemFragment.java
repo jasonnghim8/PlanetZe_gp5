@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.planetZe_gp5.DataModel;
+import com.example.planetZe_gp5.LocalData;
 import com.example.planetZe_gp5.R;
 
 public class EcoTrackerAddItemFragment extends Fragment {
@@ -111,7 +112,7 @@ public class EcoTrackerAddItemFragment extends Fragment {
         int k = spinner3.getSelectedItemPosition();
 
         questionPath = (("" + i) + j) + k;
-        questionText.setText(EcoTrackerData.getKeyString(i, j));
+        questionText.setText(LocalData.ETGetString(i, j));
      }
 
     private void setupSpinner(Spinner spinner, int arrayID) {

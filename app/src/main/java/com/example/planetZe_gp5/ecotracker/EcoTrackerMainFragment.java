@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.planetZe_gp5.DataModel;
+import com.example.planetZe_gp5.LocalData;
 import com.example.planetZe_gp5.R;
 
 import java.text.SimpleDateFormat;
@@ -52,7 +53,7 @@ public class EcoTrackerMainFragment extends Fragment {
         recyclerView.setAdapter(itemAdapter);
 
         // set calendar date to previously selected day or set default to the current day
-        long dateTime =  EcoTrackerData.calendarDate != 0 ? EcoTrackerData.calendarDate : calendarView.getDate();
+        long dateTime =  LocalData.calendarDate != 0 ? LocalData.calendarDate : calendarView.getDate();
         calendarView.setDate(dateTime);
         String date = new SimpleDateFormat("yyyy-M-d", Locale.getDefault()).format(new Date(dateTime));
 
@@ -85,7 +86,7 @@ public class EcoTrackerMainFragment extends Fragment {
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int day) {
                 dbModel.ecoTrackerPath = "categories/" + year + "-" + (month + 1) + "-" + day;
                 dbModel.listTrackerValues(itemList, itemAdapter);
-                EcoTrackerData.calendarDate = new GregorianCalendar(year, month, day).getTimeInMillis();
+                LocalData.calendarDate = new GregorianCalendar(year, month, day).getTimeInMillis();
             }
         });
 
