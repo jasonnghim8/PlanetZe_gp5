@@ -58,7 +58,7 @@ public class EcoTrackerMainFragment extends Fragment {
         String date = new SimpleDateFormat("yyyy-M-d", Locale.getDefault()).format(new Date(dateTime));
 
         dbModel = DataModel.getInstance();
-        dbModel.ecoTrackerPath = "categories/" + date;
+        dbModel.setEcoTrackerPath(date);
         dbModel.listTrackerValues(itemList, itemAdapter);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +84,7 @@ public class EcoTrackerMainFragment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int day) {
-                dbModel.ecoTrackerPath = "categories/" + year + "-" + (month + 1) + "-" + day;
+                dbModel.setEcoTrackerPath(year + "-" + (month + 1) + "-" + day);
                 dbModel.listTrackerValues(itemList, itemAdapter);
                 LocalData.calendarDate = new GregorianCalendar(year, month, day).getTimeInMillis();
             }
@@ -99,7 +99,7 @@ public class EcoTrackerMainFragment extends Fragment {
 
             // remove selected items from database and list then update adapter view
             if (item.selected) {
-                dbModel.deleteEntry(dbModel.ecoTrackerPath, item.key);
+                dbModel.deleteUserEntry(dbModel.getEcoTrackerPath(), item.key);
                 itemList.remove(i);
                 itemAdapter.notifyItemRemoved(i);
                 itemAdapter.notifyItemRangeChanged(i, itemList.size() - i);

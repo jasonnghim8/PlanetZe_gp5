@@ -16,14 +16,12 @@ final public class DataModel {
     private static DataModel dbModel;
     private final FirebaseDatabase db;
     private DatabaseReference ref;
-    public String userPath;
-    public String ecoTrackerPath;
+    private String userPath;
+    private String ecoTrackerPath;
 
     private DataModel() {
         db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
-        LocalData.setUserid("test");
-        userPath = LocalData.getUserid();
-        ecoTrackerPath = userPath;
+        ecoTrackerPath = "ecotracker/";
     }
 
     public static DataModel getInstance() {
@@ -54,7 +52,7 @@ final public class DataModel {
     }
 
     public void readUserValue(String path, Observer observer) {
-        readValue("users/" + LocalData.getUserid() + "/" + path, observer);
+        readValue(userPath + path, observer);
     }
 
     public void readValueOnChange(String path, Observer observer) {
@@ -78,7 +76,7 @@ final public class DataModel {
     }
 
     public void readUserValueOnChange(String path, Observer observer) {
-        readValueOnChange("users/" + LocalData.getUserid() + "/" + path, observer);
+        readValueOnChange(userPath + path, observer);
     }
 
     /**
@@ -108,7 +106,7 @@ final public class DataModel {
     }
 
     public void listTrackerValues(List<Item> list, ItemAdapter itemAdapter) {
-        ref = db.getReference(ecoTrackerPath);
+        ref = db.getReference(userPath + ecoTrackerPath);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -133,14 +131,30 @@ final public class DataModel {
     }
 
     public void writeUserData(String path, Object value) {
-        writeData("users/" + LocalData.getUserid() + "/" + path, value);
+        writeData(userPath + path, value);
     }
 
     public void writeEcoTrackerData(String path, Object value) {
-        writeUserData("users/" + LocalData.getUserid() + "/" + dbModel.ecoTrackerPath + "/" + path, value);
+        writeUserData(ecoTrackerPath + "/" + path, value);
     }
 
     public void deleteEntry(String path, String key) {
         db.getReference(path + "/" + key).removeValue();
+    }
+
+    public void deleteUserEntry(String path, String key) {
+        deleteEntry(userPath + path, key);
+    }
+
+    public void setUserPath(String userid) {
+        userPath = "users/" + userid + "/";
+    }
+
+    public String getEcoTrackerPath() {
+        return ecoTrackerPath;
+    }
+
+    public void setEcoTrackerPath(String path) {
+        ecoTrackerPath = "ecotracker/" + path;
     }
 }

@@ -104,5 +104,6 @@ public final class LocalData {
 
     public static void setUserid(String userid) {
         LocalData.userid = userid;
+        DataModel.getInstance().setUserPath(userid);
     }
 }

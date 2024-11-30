@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        LocalData.setUserid("test"); // change this when log in part is added
+
         if (savedInstanceState == null) {
             loadFragment(new StartFragment());
         }

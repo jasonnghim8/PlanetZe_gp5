@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">PlanetZe</string>
+    <string name="buttonACF">ACF Select Country</string>
+    <string name="buttonLogin">Login</string>
+    <string name="buttonEcoGauge">Eco Gauge</string>
     <string name="continued">continue</string>
     <string name="country_select">Please select your country below</string>
     <string name="acfResult">Your Annual Carbon Footprint is:</string>
