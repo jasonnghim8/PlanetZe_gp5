@@ -36,12 +36,9 @@ public class CountrySelection extends AppCompatActivity {
         button = findViewById(R.id.country_confirm);
 
         dbModel = new DataModel();
-        // List<String> a = new ArrayList<>();
-        // dbModel.readValue2("Users/"+userid+"/location", a);
 
 
         message.setText(R.string.country_select);
-        // message.setText(a.get(0));
 
         ArrayList<String> countries = getCountriesList();
 

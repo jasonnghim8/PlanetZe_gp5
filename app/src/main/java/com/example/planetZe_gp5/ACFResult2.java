@@ -2,7 +2,6 @@ package com.example.planetZe_gp5;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,9 +9,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.eazegraph.lib.charts.PieChart;
-import org.eazegraph.lib.models.PieModel;
-
-import java.util.HashMap;
 
 public class ACFResult2 extends AppCompatActivity {
     private TextView tvTransport, tvFood, tvHouse, tvConsume;
@@ -36,7 +32,7 @@ public class ACFResult2 extends AppCompatActivity {
         Intent lastPage = getIntent();
         userId = lastPage.getStringExtra("userid");
         if (userId == null) userId = "test";
-        calculation cal = calculation.getInstance(userId);
+        Calculation cal = Calculation.getInstance(userId);
 
         tvTransport.setText(String.valueOf(cal.transportCF/cal.totalCF));
         tvFood.setText(String.valueOf(cal.foodCF/cal.totalCF));

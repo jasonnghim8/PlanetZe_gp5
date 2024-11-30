@@ -2,12 +2,10 @@ package com.example.planetZe_gp5;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-public class calculation implements Observer {
-    private static calculation instance;
+public class Calculation implements Observer {
+    private static Calculation instance;
     public double transportCF;
     public double foodCF;
     public double housingCF;
@@ -16,14 +14,14 @@ public class calculation implements Observer {
     private  DataModel dbModel;
     public String userid;
 
-    private calculation(String userid){
+    private Calculation(String userid){
         this.userid = userid;
         dbModel = new DataModel();
     }
 
-    public static calculation getInstance(String userid) {
+    public static Calculation getInstance(String userid) {
         if (instance == null) {
-            instance = new calculation(userid);
+            instance = new Calculation(userid);
         }
         return instance;
     }

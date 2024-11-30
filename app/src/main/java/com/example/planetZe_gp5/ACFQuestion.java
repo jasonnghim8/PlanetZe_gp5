@@ -1,5 +1,6 @@
 package com.example.planetZe_gp5;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
@@ -17,16 +20,18 @@ public class ACFQuestion extends AppCompatActivity {
     private LinearLayout buttonContainer;
     private int currentQuestionIndex = 1; // question number: start with 1
     private HashMap<String, Integer> selectedAnswers = new HashMap<>(); // Saved all selected answers
-    private ACFQButtonHandler buttonHandler; // Instance of ACFQButtonHandler
     private String userid;
 
     private final String[] questions = QnA.question; //calling question from another document
     private final String[][] answers = QnA.answer; //calling answer from another document
+    private DataModel dbModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acfquestion);
+
+        dbModel = new DataModel();
 
         Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
@@ -34,8 +39,6 @@ public class ACFQuestion extends AppCompatActivity {
 
         questionTextView = findViewById(R.id.question_text);
         buttonContainer = findViewById(R.id.answer_buttons_container);
-
-        buttonHandler = new ACFQButtonHandler(userid); // specified handler only for this document
 
         Question(); //starting another question
     }
@@ -70,10 +73,10 @@ public class ACFQuestion extends AppCompatActivity {
                 } else if (currentQuestionIndex < questions.length) {
                     currentQuestionIndex++; // avoid crash on exceeding length of question
                 } else {
-                    buttonHandler.saveAllAnswersToFirebase(this, selectedAnswers);
-                    // finish();
+                    dbModel.writeData("Users/" + userid, selectedAnswers);
+                    Toast.makeText(this, "All answers saved successfully!", Toast.LENGTH_SHORT).show();
                     // continue after all questions answered
-                    calculation save = calculation.getInstance(userid);
+                    Calculation save = Calculation.getInstance(userid);
                     save.calculateCarbonFootprint(selectedAnswers);
                     Intent cont = new Intent(ACFQuestion.this, ACFResults.class);
                     cont.putExtra("userid", userid);
