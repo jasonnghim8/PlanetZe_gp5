@@ -73,12 +73,12 @@ public class ACFQuestion extends AppCompatActivity {
                     buttonHandler.saveAllAnswersToFirebase(this, selectedAnswers);
                     // finish();
                     // continue after all questions answered
-                    calculation save = new calculation(userid);
+                    calculation save = calculation.getInstance(userid);
                     save.calculateCarbonFootprint(selectedAnswers);
                     Intent cont = new Intent(ACFQuestion.this, ACFResults.class);
                     cont.putExtra("userid", userid);
                     startActivity(cont);
-                    // return;
+                    return;
                 }
 
                 Question();

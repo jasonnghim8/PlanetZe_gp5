@@ -8,10 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ACFResults extends AppCompatActivity {
+public class ACFResults extends AppCompatActivity implements Observer{
     private TextView totalAcf;
     private Button cont;
 
@@ -21,22 +18,17 @@ public class ACFResults extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         DataModel dbModel = new DataModel();
-        List<String> acf = new ArrayList<>();
-        // acf.add("");
 
         Intent lastPage = getIntent();
         userId = lastPage.getStringExtra("userid");
         if (userId == null) userId = "test";
-        dbModel.readValue2("Users/"+userId + "annualCarbonFootprint/total",
-                 acf);
-        // dbModel.readValue2("testDemo/movies", acf);
+
         setContentView(R.layout.activity_acftotal);
-
         totalAcf = this.findViewById(R.id.totalAcf);
-        String line = getResources().getString(R.string.acfResult) + acf.get(0) + " tonnes";
-        totalAcf.setText(line);
-
         cont = findViewById(R.id.acfCont);
+
+        // have to use read value on change method because the calculation takes time to write to database.
+        dbModel.readValueOnChange("Users/"+userId + "/annualCarbonFootprint/total", this);
 
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +39,12 @@ public class ACFResults extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void updateAfterRead(Object valueRead) {
+        String value = (String) valueRead;
+        String line = getResources().getString(R.string.acfResult) + value + " tonnes";
+        totalAcf.setText(line);
     }
 
     @Override

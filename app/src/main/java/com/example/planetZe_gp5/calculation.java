@@ -6,33 +6,46 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class calculation {
-    public calculation() {
-    }
-
+public class calculation implements Observer {
+    private static calculation instance;
+    public double transportCF;
+    public double foodCF;
+    public double housingCF;
+    public double consumptionCF;
+    public double totalCF;
     private  DataModel dbModel;
+    public String userid;
 
-    String userid;
-    public calculation(String userid){
+    private calculation(String userid){
         this.userid = userid;
         dbModel = new DataModel();
     }
-    public void calculateCarbonFootprint(HashMap<String, Integer> input) {
-        double cf = (calculateTransport(input) + calculateFood(input)
-                + calculateHousing(input) + calculateConsumption(input));
-        String path = "Users/" + userid + "/annualCarbonFootprint/total";
-        dbModel.writeData(path, cf);
+
+    public static calculation getInstance(String userid) {
+        if (instance == null) {
+            instance = new calculation(userid);
+        }
+        return instance;
     }
 
-    public  double calculatePercentage(String type) {
-        String path = "Users/" + userid + "/annualCarbonFootprint/" + type;
-        String pathTotal = "Users/" + userid + "/annualCarbonFootprint/total";
-        List<String> types = new ArrayList<String>();
-        dbModel.readValue(path, types);
-        dbModel.readValue(pathTotal, types);
-        double typeData = Double.parseDouble(types.get(0));
-        double total = Double.parseDouble(types.get(1));
-        return typeData/total;
+    public void calculateCarbonFootprint(HashMap<String, Integer> input) {
+        transportCF = calculateTransport(input);
+        foodCF = calculateFood(input);
+        consumptionCF = calculateConsumption(input);
+        calculateHousing(input); // this calculates and adds housing emission
+    }
+
+    public void updateAfterRead(Object valueRead) {
+        String housingCFValue = (String) valueRead;
+        housingCF += Double.parseDouble(housingCFValue);
+        housingCF *= 0.001;
+
+        String path2 = "Users/" + userid + "/annualCarbonFootprint/Housing";
+        dbModel.writeData(path2, housingCF);
+
+        totalCF = transportCF + foodCF + housingCF + consumptionCF;
+        String path = "Users/" + userid + "/annualCarbonFootprint/total";
+        dbModel.writeData(path, totalCF);
     }
 
     public  double calculateTransport(@NonNull HashMap<String, Integer> input) {
@@ -256,9 +269,11 @@ public class calculation {
         return 140.4;
     }
 
-    public  double calculateHousing(@NonNull HashMap<String, Integer> input) {
-        if (!input.containsKey("14")) return 0;
-        List<String> ef = new ArrayList<>();
+    public  void calculateHousing(@NonNull HashMap<String, Integer> input) {
+        if (!input.containsKey("14")) {
+            updateAfterRead("0");
+            return;
+        }
         int type = input.get("14");
         if (type == 5) type = 3;
         int ppl = input.getOrDefault("15", 1);
@@ -273,18 +288,16 @@ public class calculation {
         id += (size - 1) * 100;
         id += (homeEnergy - 1);
         id += (bill - 1) * 5;
-        String path = "Housing_data/" + id;
-        dbModel.readValue(path, ef);
 
-        double cf = Double.parseDouble(ef.get(0));
-        // double cf = 0;
-        if (homeEnergy != waterHeat) cf += 233;
-        if (renew == 1) cf -= 6000;
-        else if (renew == 2) cf -= 4000;
-        cf = cf * 0.001;
-        String path2 = "Users/" + userid + "/annualCarbonFootprint/Housing";
-        dbModel.writeData(path2, cf);
-        return cf;
+        housingCF = 0;
+        if (homeEnergy != waterHeat) housingCF += 233;
+        if (renew == 1) housingCF -= 6000;
+        else if (renew == 2) housingCF -= 4000;
+
+
+        String path = "Housing_data/" + id + "/Emission";
+        dbModel.readValue(path, this);
+        // once value is read the calculation is continued in the update method
     }
 
     public  double calculateConsumption(@NonNull HashMap<String, Integer> input) {

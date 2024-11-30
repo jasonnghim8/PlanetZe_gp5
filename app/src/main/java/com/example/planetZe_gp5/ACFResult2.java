@@ -36,28 +36,25 @@ public class ACFResult2 extends AppCompatActivity {
         Intent lastPage = getIntent();
         userId = lastPage.getStringExtra("userid");
         if (userId == null) userId = "test";
-        calculation cal = new calculation(userId);
+        calculation cal = calculation.getInstance(userId);
 
-        tvTransport.setText(String.valueOf(cal.calculatePercentage("Transport")));
-        tvFood.setText(String.valueOf(cal.calculatePercentage("Food")));
-        tvHouse.setText(String.valueOf(cal.calculatePercentage("Housing")));
-        tvConsume.setText(String.valueOf(cal.calculatePercentage("Consumption")));
+        tvTransport.setText(String.valueOf(cal.transportCF/cal.totalCF));
+        tvFood.setText(String.valueOf(cal.foodCF/cal.totalCF));
+        tvHouse.setText(String.valueOf(cal.housingCF/cal.totalCF));
+        tvConsume.setText(String.valueOf(cal.consumptionCF/cal.totalCF));
 
-        pieChart.addPieSlice(new PieModel(R.string.transport,
-                Integer.parseInt(tvTransport.getText().toString())));
-        Color.parseColor(String.valueOf(R.color.blue));
+//        int color = Color.parseColor(String.valueOf(R.color.blue));
+//        pieChart.addPieSlice(new PieModel("Transportation", (float)(cal.transportCF/cal.totalCF), color));
+//
+//        color = Color.parseColor(String.valueOf(R.color.dark_blue));
+//        pieChart.addPieSlice(new PieModel("Food", (float)cal.foodCF, color));
+//
+//        color = Color.parseColor(String.valueOf(R.color.dark));
+//        pieChart.addPieSlice(new PieModel("Housing", (float)cal.housingCF, color));
+//
+//        color = Color.parseColor(String.valueOf(R.color.grey));
+//        pieChart.addPieSlice(new PieModel("Consumption", (float)cal.consumptionCF, color));
 
-        pieChart.addPieSlice(new PieModel(R.string.food,
-                Integer.parseInt(tvFood.getText().toString())));
-        Color.parseColor(String.valueOf(R.color.dark_blue));
-
-        pieChart.addPieSlice(new PieModel(R.string.housing,
-                Integer.parseInt(tvHouse.getText().toString())));
-        Color.parseColor(String.valueOf(R.color.dark));
-
-        pieChart.addPieSlice(new PieModel(R.string.consumption,
-                Integer.parseInt(tvConsume.getText().toString())));
-        Color.parseColor(String.valueOf(R.color.grey));
 
         cont = findViewById(R.id.acf2cont);
         cont.setOnClickListener(v -> {
