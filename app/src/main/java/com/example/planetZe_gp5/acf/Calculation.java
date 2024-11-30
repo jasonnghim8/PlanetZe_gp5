@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5.ACF;
+package com.example.planetZe_gp5.acf;
 
 import androidx.annotation.NonNull;
 
@@ -41,12 +41,10 @@ public class Calculation implements Observer {
         housingCF += Double.parseDouble(housingCFValue);
         housingCF *= 0.001;
 
-        String path2 = "Users/" + userid + "/annualCarbonFootprint/Housing";
-        dbModel.writeData(path2, housingCF);
+        dbModel.writeUserData("annualCarbonFootprint/Housing", housingCF);
 
         totalCF = transportCF + foodCF + housingCF + consumptionCF;
-        String path = "Users/" + userid + "/annualCarbonFootprint/total";
-        dbModel.writeData(path, totalCF);
+        dbModel.writeUserData("annualCarbonFootprint/total", totalCF);
     }
 
     public  double calculateTransport(@NonNull HashMap<String, Integer> input) {
@@ -57,9 +55,8 @@ public class Calculation implements Observer {
         }
         cf += calculatePT(input);
         cf += calculateFlight(input);
-        String path = "Users/" + userid + "/annualCarbonFootprint/transportation";
         cf = cf * 0.001;
-        dbModel.writeData(path, cf);
+        dbModel.writeUserData("annualCarbonFootprint/transportation", cf);
         return cf;
     }
 
@@ -177,16 +174,14 @@ public class Calculation implements Observer {
         // pls switch the order of vegetarian and vegan for simplicity
         if (diet < 4) {
             double cf = 500 * diet + calculateLeftover(input);
-            String path = "Users/" + userid + "/annualCarbonFootprint/Food";
-            dbModel.writeData(path, cf);
+            dbModel.writeUserData("annualCarbonFootprint/Food", cf);
             return cf;
         }
         double cf = calculateBeef(input) + calculatePork(input) +
                 calculateChicken(input) + calculateSeafood(input) +
                 calculateLeftover(input);
         cf = cf * 0.001;
-        String path = "Users/" + userid + "/annualCarbonFootprint/Food";
-        dbModel.writeData(path, cf);
+        dbModel.writeUserData("annualCarbonFootprint/Food", cf);
         return cf;
     }
 
@@ -313,8 +308,7 @@ public class Calculation implements Observer {
         cf += calculateDevice(device);
         cf -= calculateRecycle(recycle, clothes, device);
         cf = cf * 0.001;
-        String path = "Users/" + userid + "/annualCarbonFootprint/Consumption";
-        dbModel.writeData(path, cf);
+        dbModel.writeUserData("annualCarbonFootprint/Consumption", cf);
         return cf;
     }
 

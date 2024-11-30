@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5.ACF;
+package com.example.planetZe_gp5.acf;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,7 +54,7 @@ public class SpinnerFragment_Country extends Fragment {
             @Override
             public void onClick(View v){
                 String selected = spinner.getSelectedItem().toString();
-                dbModel.writeData("Users/"+userId+"/location", selected);
+                dbModel.writeUserData("location", selected);
                 Intent intent = new Intent(getActivity(), ACFResults.class);
                 startActivity(intent);
             }

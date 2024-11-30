@@ -2,6 +2,8 @@ package com.example.planetZe_gp5;
 
 import androidx.annotation.NonNull;
 
+import com.example.planetZe_gp5.ecotracker.Item;
+import com.example.planetZe_gp5.ecotracker.ItemAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -10,20 +12,27 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class DataModel {
+final public class DataModel {
+    private static DataModel dbModel;
     private final FirebaseDatabase db;
+    private DatabaseReference ref;
+    public String ecoTrackerPath;
 
-    private DatabaseReference itemsRef;
-
-    private String values = " ";
-
-    public DataModel() {
+    private DataModel() {
         db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
+        ecoTrackerPath = "";
+    }
+
+    public static DataModel getInstance() {
+        if (dbModel == null) {
+            dbModel = new DataModel();
+        }
+        return dbModel;
     }
 
     public void readValue(String path, Observer observer) {
-        itemsRef = db.getReference(path);
-        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref = db.getReference(path);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Object obj = dataSnapshot.getValue();
@@ -42,8 +51,8 @@ public class DataModel {
     }
 
     public void readValueOnChange(String path, Observer observer) {
-        itemsRef = db.getReference(path);
-        itemsRef.addValueEventListener(new ValueEventListener() {
+        ref = db.getReference(path);
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Object obj = snapshot.getValue();
@@ -67,8 +76,8 @@ public class DataModel {
      * @param list string array list to store the values.
      */
     public void readData(String path, List<String> list) {
-        itemsRef = db.getReference(path);
-        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref = db.getReference(path);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -92,8 +101,8 @@ public class DataModel {
      */
     public void searchCorrData(String path, Observer observer, String key, String object,
                                String target){
-        itemsRef = db.getReference(path);
-        itemsRef.orderByChild(key).equalTo(object).addListenerForSingleValueEvent(
+        ref = db.getReference(path);
+        ref.orderByChild(key).equalTo(object).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -111,8 +120,40 @@ public class DataModel {
         );
     }
 
+    public void listTrackerValues(List<Item> list, ItemAdapter itemAdapter) {
+        ref = db.getReference(ecoTrackerPath);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Item item = new Item(snapshot.getKey(), (String) snapshot.getValue());
+                    list.add(item);
+                }
+                itemAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors
+            }
+        });
+    }
+
     public void writeData(String path, Object value) {
         DatabaseReference myRef = db.getReference(path);
         myRef.setValue(value);
+    }
+
+    public void writeUserData(String path, Object value) {
+        writeData("users/" + LocalData.userid + "/" + path, value);
+    }
+
+    public void writeEcoTrackerData(String path, Object value) {
+        writeUserData(dbModel.ecoTrackerPath + "/" + path, value);
+    }
+
+    public void deleteEntry(String path, String key) {
+        db.getReference(path + "/" + key).removeValue();
     }
 }

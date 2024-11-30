@@ -1,14 +1,5 @@
 <resources>
     <string name="app_name">PlanetZe</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="delete_item">Delete Item</string>
-    <string name="add_item">Add Item</string>
-    <string name="back">Back</string>
-    <string name="recyclerview">RecyclerView</string>
-    <string name="scroller">Scroller</string>
-    <string name="spinner">Spinner</string>
-    <string name="manage_items">Manage Items</string>
     <string name="continued">continue</string>
     <string name="country_select">Please select your country below</string>
     <string name="acfResult">Your Annual Carbon Footprint is:</string>
@@ -17,7 +8,84 @@
     <string name="housing">housing</string>
     <string name="consumption">consumption</string>
     <string name="acfResult2">Your Annual Carbon Footprint for each category (in tons):</string>
+    <string name="delete_item">Delete Item</string>
+    <string name="add_item">Add</string>
+    <string name="save">Save Edits</string>
+    <string name="key">Key</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="recyclerview">View Items</string>
+    <string name="scroller">Scroller</string>
+    <string name="spinner">Spinner</string>
+    <string name="manage_items">Manage Items</string>
+    <string name="textView4">Select a Date:</string>
 
+    <string-array name="emptyArray">
+    </string-array>
+
+    <string-array name="categories">
+        <item>Transportation</item>
+        <item>Food</item>
+        <item>Consumption and Shopping</item>
+    </string-array>
+
+    <string-array name="categoryTransportation">
+        <item>Personal Vehicle</item>
+        <item>Public Transportation</item>
+        <item>Cycling or Walking</item>
+        <item>Flight</item>
+    </string-array>
+
+    <string-array name="categoryPersonalVehicle">
+        <item>Gasoline</item>
+        <item>Diesel</item>
+        <item>Hybrid</item>
+        <item>Electric</item>
+        <item>I do not know</item>
+    </string-array>
+
+    <string-array name="categoryPublicTransportation">
+        <item>Bus</item>
+        <item>Subway</item>
+        <item>Train</item>
+    </string-array>
+
+    <string-array name="categoryFlight">
+        <item>Short-Haul(less than 1,500km)</item>
+        <item>Long-Haul(more than 1,500km)</item>
+    </string-array>
+
+    <string-array name="categoryFood">
+        <item>Beef</item>
+        <item>Pork</item>
+        <item>Chicken</item>
+        <item>Fish</item>
+        <item>Plant-Based</item>
+    </string-array>
+
+    <string-array name="categoryExpenses">
+        <item>Clothes</item>
+        <item>Electronics</item>
+        <item>Other Purchases</item>
+        <item>Energy Bills</item>
+    </string-array>
+
+    <string-array name="categoryElectronics">
+        <item>Smartphone</item>
+        <item>Laptop</item>
+        <item>TV</item>
+    </string-array>
+
+    <string-array name="categoryEnergyBills">
+        <item>Gas</item>
+        <item>Electricity</item>
+        <item>Water</item>
+    </string-array>
+
+    <string-array name="categoryOther">
+        <item>Furniture</item>
+        <item>Appliances</item>
+    </string-array>
 
     <string-array name="questions">
         <item>Do you own or regularly use a car?</item>

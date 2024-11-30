@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5.ACF;
+package com.example.planetZe_gp5.acf;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -76,7 +76,7 @@ public class ACFQuestion extends AppCompatActivity {
                 } else if (currentQuestionIndex < questions.length) {
                     currentQuestionIndex++; // avoid crash on exceeding length of question
                 } else {
-                    dbModel.writeData("Users/" + userid + "/annualCarbonFootprint", selectedAnswers);
+                    dbModel.writeUserData("annualCarbonFootprint", selectedAnswers);
                     Toast.makeText(this, "All answers saved successfully!", Toast.LENGTH_SHORT).show();
                     // continue after all questions answered
                     Calculation save = Calculation.getInstance(userid);

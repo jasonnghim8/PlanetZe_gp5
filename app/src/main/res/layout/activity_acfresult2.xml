@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/navy"
-    tools:context=".ACFResult2">
+    tools:context=".acf.ACFResult2">
 
     <!-- Card view for displaying the -->
     <!-- Pie chart and details of pie chart -->
