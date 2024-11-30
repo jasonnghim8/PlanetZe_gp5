@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5;
+package com.example.planetZe_gp5.ACF;
 
 
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.planetZe_gp5.R;
 
 import org.eazegraph.lib.charts.PieChart;
 

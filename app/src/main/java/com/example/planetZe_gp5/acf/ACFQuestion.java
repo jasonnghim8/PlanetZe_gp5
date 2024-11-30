@@ -1,6 +1,5 @@
-package com.example.planetZe_gp5;
+package com.example.planetZe_gp5.ACF;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -11,6 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.planetZe_gp5.DataModel;
+import com.example.planetZe_gp5.QnA;
+import com.example.planetZe_gp5.R;
 
 import java.util.HashMap;
 
@@ -31,7 +34,7 @@ public class ACFQuestion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acfquestion);
 
-        dbModel = new DataModel();
+        dbModel = DataModel.getInstance();
 
         Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
@@ -73,7 +76,7 @@ public class ACFQuestion extends AppCompatActivity {
                 } else if (currentQuestionIndex < questions.length) {
                     currentQuestionIndex++; // avoid crash on exceeding length of question
                 } else {
-                    dbModel.writeData("Users/" + userid, selectedAnswers);
+                    dbModel.writeData("Users/" + userid + "/annualCarbonFootprint", selectedAnswers);
                     Toast.makeText(this, "All answers saved successfully!", Toast.LENGTH_SHORT).show();
                     // continue after all questions answered
                     Calculation save = Calculation.getInstance(userid);

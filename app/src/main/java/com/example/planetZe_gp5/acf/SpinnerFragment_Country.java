@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5;
+package com.example.planetZe_gp5.ACF;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.planetZe_gp5.DataModel;
+import com.example.planetZe_gp5.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +39,7 @@ public class SpinnerFragment_Country extends Fragment {
         message = view.findViewById(R.id.choose_country);
         button = view.findViewById(R.id.country_confirm);
 
-        dbModel = new DataModel();
+        dbModel = DataModel.getInstance();
 
         message.setText(R.string.country_select);
 
@@ -51,7 +54,7 @@ public class SpinnerFragment_Country extends Fragment {
             @Override
             public void onClick(View v){
                 String selected = spinner.getSelectedItem().toString();
-                storeCountry(selected, userId);
+                dbModel.writeData("Users/"+userId+"/location", selected);
                 Intent intent = new Intent(getActivity(), ACFResults.class);
                 startActivity(intent);
             }
@@ -75,10 +78,5 @@ public class SpinnerFragment_Country extends Fragment {
         Arrays.sort(sortedCountries);
 
         return new ArrayList<>(Arrays.asList(sortedCountries));
-    }
-
-    private void storeCountry(String country, String user){
-        String parent = "Users/";
-        dbModel.writeData(parent+userId+"/location", country);
     }
 }

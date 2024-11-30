@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5;
+package com.example.planetZe_gp5.ACF;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.example.planetZe_gp5.DataModel;
+import com.example.planetZe_gp5.Observer;
+import com.example.planetZe_gp5.R;
 
-public class ACFResults3 extends AppCompatActivity implements Observer{
+public class ACFResults3 extends AppCompatActivity implements Observer {
     private TextView result, region, global;
     private String userid;
     private DataModel dbModel;
@@ -24,7 +24,7 @@ public class ACFResults3 extends AppCompatActivity implements Observer{
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        dbModel = new DataModel();
+        dbModel = DataModel.getInstance();
         setContentView(R.layout.activity_acfresult3);
 
         result = findViewById(R.id.acfresult3);

@@ -1,6 +1,9 @@
-package com.example.planetZe_gp5;
+package com.example.planetZe_gp5.ACF;
 
 import androidx.annotation.NonNull;
+
+import com.example.planetZe_gp5.DataModel;
+import com.example.planetZe_gp5.Observer;
 
 import java.util.HashMap;
 
@@ -11,12 +14,12 @@ public class Calculation implements Observer {
     public double housingCF;
     public double consumptionCF;
     public double totalCF;
-    private  DataModel dbModel;
+    private DataModel dbModel;
     public String userid;
 
     private Calculation(String userid){
         this.userid = userid;
-        dbModel = new DataModel();
+        dbModel = DataModel.getInstance();
     }
 
     public static Calculation getInstance(String userid) {

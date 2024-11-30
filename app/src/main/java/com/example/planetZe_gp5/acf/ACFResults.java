@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5;
+package com.example.planetZe_gp5.ACF;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ACFResults extends AppCompatActivity implements Observer{
+import com.example.planetZe_gp5.DataModel;
+import com.example.planetZe_gp5.Observer;
+import com.example.planetZe_gp5.R;
+
+public class ACFResults extends AppCompatActivity implements Observer {
     private TextView totalAcf;
     private Button cont;
 
@@ -17,7 +21,7 @@ public class ACFResults extends AppCompatActivity implements Observer{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        DataModel dbModel = new DataModel();
+        DataModel dbModel = DataModel.getInstance();
 
         Intent lastPage = getIntent();
         userId = lastPage.getStringExtra("userid");

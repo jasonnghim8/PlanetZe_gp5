@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5;
+package com.example.planetZe_gp5.ACF;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +10,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.example.planetZe_gp5.DataModel;
+import com.example.planetZe_gp5.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 
 public class CountrySelection extends AppCompatActivity {
@@ -35,7 +37,7 @@ public class CountrySelection extends AppCompatActivity {
         message = findViewById(R.id.choose_country);
         button = findViewById(R.id.country_confirm);
 
-        dbModel = new DataModel();
+        dbModel = DataModel.getInstance();
 
 
         message.setText(R.string.country_select);
@@ -49,7 +51,7 @@ public class CountrySelection extends AppCompatActivity {
 
         button.setOnClickListener(v -> {
             String selected = spinner.getSelectedItem().toString();
-            storeCountry(selected);
+            dbModel.writeData("Users/"+userid+"/location", selected);
             Intent intent1 = new Intent(CountrySelection.this, ACFQuestion.class);
             intent1.putExtra("userid", userid);
             startActivity(intent1);
@@ -70,10 +72,5 @@ public class CountrySelection extends AppCompatActivity {
         Arrays.sort(sortedCountries);
 
         return new ArrayList<>(Arrays.asList(sortedCountries));
-    }
-
-    private void storeCountry(String country){
-        String parent = "Users/";
-        dbModel.writeData(parent+userid+"/location", country);
     }
 }
