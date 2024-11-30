@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.planetZe_gp5.DataModel;
 import com.example.planetZe_gp5.LocalData;
+import com.example.planetZe_gp5.MainActivity;
 import com.example.planetZe_gp5.Observer;
 import com.example.planetZe_gp5.R;
 
@@ -33,11 +34,10 @@ public class ACFResults3 extends AppCompatActivity implements Observer {
         cont = findViewById(R.id.continue3);
         back = findViewById(R.id.acf3back);
 
-        String path = "Users/" + LocalData.userid + "/location";
-        dbModel.readValue(path, this);
+        dbModel.readUserValue("location", this);
 
         cont.setOnClickListener(v -> {
-            Intent intent = new Intent(ACFResults3.this, CountrySelection.class);
+            Intent intent = new Intent(ACFResults3.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
             startActivity(intent);
         });

@@ -27,13 +27,12 @@ public class ACFResults extends AppCompatActivity implements Observer {
         cont = findViewById(R.id.acfCont);
 
         // have to use read value on change method because the calculation takes time to write to database.
-        dbModel.readValueOnChange("Users/"+ LocalData.userid + "/annualCarbonFootprint/total", this);
+        dbModel.readUserValueOnChange("annualCarbonFootprint/total", this);
 
         cont.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ACFResults.this, ACFResult2.class);
-                intent.putExtra("userid", LocalData.userid);
                 startActivity(intent);
             }
         });

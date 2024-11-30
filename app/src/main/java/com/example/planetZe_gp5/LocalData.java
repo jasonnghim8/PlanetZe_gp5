@@ -1,7 +1,7 @@
 package com.example.planetZe_gp5;
 
 public final class LocalData {
-    public static String userid;
+    private static String userid;
 
     // ACF data.
 
@@ -96,5 +96,13 @@ public final class LocalData {
         int i = (int)ijk.charAt(0) - '0';
         int j = (int)ijk.charAt(1) - '0';
         return LocalData.ETGetString(i, j);
+    }
+
+    public static String getUserid() {
+        return LocalData.userid;
+    }
+
+    public static void setUserid(String userid) {
+        LocalData.userid = userid;
     }
 }

@@ -23,10 +23,7 @@ public class ACFQuestion extends AppCompatActivity {
     private LinearLayout buttonContainer;
     private int currentQuestionIndex = 1; // question number: start with 1
     private HashMap<String, Integer> selectedAnswers = new HashMap<>(); // Saved all selected answers
-    private String userid;
 
-    private final String[] questions = LocalData.ACFquestion; //calling question from another document
-    private final String[][] answers = LocalData.ACFanswer; //calling answer from another document
     private DataModel dbModel;
 
     @Override
@@ -35,10 +32,6 @@ public class ACFQuestion extends AppCompatActivity {
         setContentView(R.layout.activity_acfquestion);
 
         dbModel = DataModel.getInstance();
-
-        Intent intent = getIntent();
-        userid = intent.getStringExtra("userid");
-        if (userid == null) userid = "test";
 
         questionTextView = findViewById(R.id.question_text);
         buttonContainer = findViewById(R.id.answer_buttons_container);
@@ -49,11 +42,11 @@ public class ACFQuestion extends AppCompatActivity {
     private void Question() {
         buttonContainer.removeAllViews(); // delete previous question
 
-        questionTextView.setText(questions[currentQuestionIndex-1]); // show question
+        questionTextView.setText(LocalData.ACFquestion[currentQuestionIndex-1]); // show question
 
         int buttonNumber = 1; // counting from above as 1
 
-        for (String answer : answers[currentQuestionIndex-1]) {
+        for (String answer : LocalData.ACFanswer[currentQuestionIndex-1]) {
             Button button = new Button(this);
             button.setText(answer);
             button.setLayoutParams(new LinearLayout.LayoutParams(
@@ -73,7 +66,7 @@ public class ACFQuestion extends AppCompatActivity {
                     currentQuestionIndex = 4; // Jump to question 4
                 } else if (currentQuestionIndex == 8 && currentButtonNumber != 4) {
                     currentQuestionIndex = 13; // Jump to question 10
-                } else if (currentQuestionIndex < questions.length) {
+                } else if (currentQuestionIndex < LocalData.ACFquestion.length) {
                     currentQuestionIndex++; // avoid crash on exceeding length of question
                 } else {
                     dbModel.writeUserData("annualCarbonFootprint", selectedAnswers);
@@ -82,7 +75,6 @@ public class ACFQuestion extends AppCompatActivity {
                     Calculation save = Calculation.getInstance();
                     save.calculateCarbonFootprint(selectedAnswers);
                     Intent cont = new Intent(ACFQuestion.this, ACFResults.class);
-                    cont.putExtra("userid", userid);
                     startActivity(cont);
                     return;
                 }

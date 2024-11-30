@@ -16,11 +16,14 @@ final public class DataModel {
     private static DataModel dbModel;
     private final FirebaseDatabase db;
     private DatabaseReference ref;
+    public String userPath;
     public String ecoTrackerPath;
 
     private DataModel() {
         db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
-        ecoTrackerPath = "";
+        LocalData.setUserid("test");
+        userPath = LocalData.getUserid();
+        ecoTrackerPath = userPath;
     }
 
     public static DataModel getInstance() {
@@ -50,6 +53,10 @@ final public class DataModel {
         });
     }
 
+    public void readUserValue(String path, Observer observer) {
+        readValue("users/" + LocalData.getUserid() + "/" + path, observer);
+    }
+
     public void readValueOnChange(String path, Observer observer) {
         ref = db.getReference(path);
         ref.addValueEventListener(new ValueEventListener() {
@@ -70,28 +77,8 @@ final public class DataModel {
         });
     }
 
-    /**
-     * store values for all keys in list for a given path.
-     * @param path path to key value pairs.
-     * @param list string array list to store the values.
-     */
-    public void readData(String path, List<String> list) {
-        ref = db.getReference(path);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String value = snapshot.getValue().toString();
-                    list.add(value);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle possible errors
-                list.add("0");
-            }
-        });
+    public void readUserValueOnChange(String path, Observer observer) {
+        readValueOnChange("users/" + LocalData.getUserid() + "/" + path, observer);
     }
 
     /**
@@ -146,11 +133,11 @@ final public class DataModel {
     }
 
     public void writeUserData(String path, Object value) {
-        writeData("users/" + LocalData.userid + "/" + path, value);
+        writeData("users/" + LocalData.getUserid() + "/" + path, value);
     }
 
     public void writeEcoTrackerData(String path, Object value) {
-        writeUserData(dbModel.ecoTrackerPath + "/" + path, value);
+        writeUserData("users/" + LocalData.getUserid() + "/" + dbModel.ecoTrackerPath + "/" + path, value);
     }
 
     public void deleteEntry(String path, String key) {

@@ -28,7 +28,6 @@ public class CountrySelection extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        LocalData.userid = "test";
         setContentView(R.layout.activity_country_selection);
 
         spinner = findViewById(R.id.country_selection);

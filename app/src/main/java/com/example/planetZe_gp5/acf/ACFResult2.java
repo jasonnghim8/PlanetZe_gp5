@@ -18,8 +18,6 @@ public class ACFResult2 extends AppCompatActivity {
     private Button back;
     private PieChart pieChart;
 
-    String userId;
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -31,9 +29,6 @@ public class ACFResult2 extends AppCompatActivity {
         tvConsume = findViewById(R.id.tvConsume);
         pieChart = findViewById(R.id.piechart);
 
-        Intent lastPage = getIntent();
-        userId = lastPage.getStringExtra("userid");
-        if (userId == null) userId = "test";
         Calculation cal = Calculation.getInstance();
 
         tvTransport.setText(String.valueOf(cal.transportCF/cal.totalCF));
