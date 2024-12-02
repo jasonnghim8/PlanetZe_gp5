@@ -2,15 +2,18 @@ package com.example.planetZe_gp5.acf;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.planetZe_gp5.R;
 
 import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 
 public class ACFResult2 extends AppCompatActivity {
     private TextView tvTransport, tvFood, tvHouse, tvConsume;
@@ -31,22 +34,27 @@ public class ACFResult2 extends AppCompatActivity {
 
         Calculation cal = Calculation.getInstance();
 
-        tvTransport.setText(String.valueOf(cal.transportCF/cal.totalCF));
-        tvFood.setText(String.valueOf(cal.foodCF/cal.totalCF));
-        tvHouse.setText(String.valueOf(cal.housingCF/cal.totalCF));
-        tvConsume.setText(String.valueOf(cal.consumptionCF/cal.totalCF));
+        tvTransport.setText(String.valueOf(100*cal.transportCF/cal.totalCF));
+        tvFood.setText(String.valueOf(100*cal.foodCF/cal.totalCF));
+        tvHouse.setText(String.valueOf(100*cal.housingCF/cal.totalCF));
+        tvConsume.setText(String.valueOf(100*cal.consumptionCF/cal.totalCF));
 
-//        int color = Color.parseColor(String.valueOf(R.color.blue));
-//        pieChart.addPieSlice(new PieModel("Transportation", (float)(cal.transportCF/cal.totalCF), color));
-//
-//        color = Color.parseColor(String.valueOf(R.color.dark_blue));
-//        pieChart.addPieSlice(new PieModel("Food", (float)cal.foodCF, color));
-//
-//        color = Color.parseColor(String.valueOf(R.color.dark));
-//        pieChart.addPieSlice(new PieModel("Housing", (float)cal.housingCF, color));
-//
-//        color = Color.parseColor(String.valueOf(R.color.grey));
-//        pieChart.addPieSlice(new PieModel("Consumption", (float)cal.consumptionCF, color));
+       int color = ContextCompat.getColor(this, R.color.blue);
+       pieChart.addPieSlice(new PieModel("transportation",
+               (float) (cal.transportCF/cal.totalCF),
+               color));
+       color = ContextCompat.getColor(this, R.color.dark_blue);
+       pieChart.addPieSlice(new PieModel("Food", (float)(cal.foodCF/cal.totalCF),
+               color));
+
+       color = ContextCompat.getColor(this, R.color.dark);
+       pieChart.addPieSlice(new PieModel("Housing", (float)(cal.housingCF/cal.totalCF),
+               color));
+
+       color = ContextCompat.getColor(this, R.color.grey);
+       pieChart.addPieSlice(new PieModel("Consumption",
+               (float)(cal.consumptionCF/cal.totalCF),
+               color));
 
 
         cont = findViewById(R.id.acf2cont);

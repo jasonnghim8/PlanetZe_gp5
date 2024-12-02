@@ -20,6 +20,7 @@ public class ACFResults3 extends AppCompatActivity implements Observer {
     private Button cont;
     private Button back;
     private int readCount; // number of times data has finished reading from database
+    protected double cf;
     private String userArea;
 
     @Override
@@ -34,6 +35,7 @@ public class ACFResults3 extends AppCompatActivity implements Observer {
         cont = findViewById(R.id.continue3);
         back = findViewById(R.id.acf3back);
 
+        dbModel.readUserValue("annualCarbonFootprint/total", this);
         dbModel.readUserValue("location", this);
 
         cont.setOnClickListener(v -> {
@@ -67,6 +69,11 @@ public class ACFResults3 extends AppCompatActivity implements Observer {
         // first read gets userArea, next read gets emission for that area.
         readCount++;
         if (readCount == 1) {
+            String cfVal = (String) valueRead;
+            cf = Double.parseDouble(cfVal);
+            return;
+        }
+        if (readCount == 2) {
             userArea = (String) valueRead;
             String path = "CountryAnnualPerCapita";
             dbModel.searchCorrData(path, this, "Country", userArea, "emission");
@@ -76,7 +83,6 @@ public class ACFResults3 extends AppCompatActivity implements Observer {
         // update page now that we have both values
         double countryCf = (double) valueRead;
 
-        double cf = 0;
         String cfResult = "Your current carbon footprint is" + cf;
         result.setText(cfResult);
 
@@ -95,6 +101,7 @@ public class ACFResults3 extends AppCompatActivity implements Observer {
         double diffPercentGb = Math.abs(diffGb)/countryCf;
 
         String compare3 = "Your carbon footprint is " + diffPercentGb + "% " + compareString(diffGb) + " the global average";
-        region.setText(compare3);
+        compare3 =compareGb + "\n" + compare3;
+        global.setText(compare3);
     }
 }

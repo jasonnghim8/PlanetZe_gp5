@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".acf.ACFResults3">
+    tools:context=".acf.ACFResults3"
+    android:background="@color/navy">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -23,6 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="226dp"
             android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/black"
             android:text="TextView" />
 
         <TextView
@@ -30,6 +33,8 @@
             android:layout_width="match_parent"
             android:layout_height="197dp"
             android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/black"
             android:text="TextView" />
 
         <TextView
@@ -37,6 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="234dp"
             android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="@color/black"
             android:text="TextView" />
     </LinearLayout>
 
@@ -44,7 +51,7 @@
         android:id="@+id/continue3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="308dp"
+        android:layout_marginStart="292dp"
         android:layout_marginBottom="14dp"
         android:background="@drawable/dark_blue_smooth"
         android:text="@string/continued"

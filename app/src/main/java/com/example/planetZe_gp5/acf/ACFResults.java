@@ -41,7 +41,8 @@ public class ACFResults extends AppCompatActivity implements Observer {
 
     public void updateAfterRead(Object valueRead) {
         String value = (String) valueRead;
-        String line = getResources().getString(R.string.acfResult) + value + " tonnes";
+       // value = String.format("%.2f", Double.parseDouble(value));
+        String line = getResources().getString(R.string.acfResult) +"\n" + value + " tonnes";
         totalAcf.setText(line);
     }
 
