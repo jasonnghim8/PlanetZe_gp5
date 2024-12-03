@@ -107,12 +107,12 @@ public class EcoTrackerAddItemFragment extends Fragment {
      }
 
      private void updateQuestionText() {
-        int i = spinner1.getSelectedItemPosition();
-        int j = spinner2.getSelectedItemPosition();
-        int k = spinner3.getSelectedItemPosition();
+        int i = Math.max(spinner1.getSelectedItemPosition(), 0);
+        int j = Math.max(spinner2.getSelectedItemPosition(), 0);
+        int k = Math.max(spinner3.getSelectedItemPosition(), 0);
 
         questionPath = (("" + i) + j) + k;
-        questionText.setText(LocalData.ETGetString(i, j));
+        questionText.setText(LocalData.ETQuestions[i][j][k]);
      }
 
     private void setupSpinner(Spinner spinner, int arrayID) {

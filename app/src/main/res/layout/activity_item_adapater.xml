@@ -13,6 +13,7 @@
         android:checkable="true"
         android:checked="false"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,16 +21,16 @@
         android:id="@+id/editValue"
         android:layout_width="69dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="10dp"
         android:ems="10"
         android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/chip"
-        app:layout_constraintEnd_toEndOf="@+id/chip"
+        app:layout_constraintStart_toEndOf="@+id/name"
         app:layout_constraintTop_toTopOf="@+id/chip" />
 
     <TextView
-        android:id="@+id/keyText"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -38,6 +39,16 @@
         app:layout_constraintStart_toStartOf="@+id/chip"
         app:layout_constraintTop_toTopOf="@+id/chip"
         app:layout_constraintVertical_bias="0.517" />
+
+    <TextView
+        android:id="@+id/textFootprint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="@string/footprint"
+        app:layout_constraintBottom_toBottomOf="@+id/chip"
+        app:layout_constraintEnd_toEndOf="@+id/chip"
+        app:layout_constraintTop_toTopOf="@+id/chip" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

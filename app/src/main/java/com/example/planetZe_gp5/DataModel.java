@@ -1,7 +1,11 @@
 package com.example.planetZe_gp5;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
+import com.example.planetZe_gp5.ecotracker.AverageFootprint;
+import com.example.planetZe_gp5.ecotracker.Calculation;
 import com.example.planetZe_gp5.ecotracker.Item;
 import com.example.planetZe_gp5.ecotracker.ItemAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -10,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 
 final public class DataModel {
@@ -116,6 +121,36 @@ final public class DataModel {
                     list.add(item);
                 }
                 itemAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors
+            }
+        });
+    }
+
+    public void readAllItemFootprints(HashMap<String, AverageFootprint> map, Observer observer) {
+        ref = db.getReference(userPath + "ecotracker/");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        double itemFootprint = Calculation.calculateFootprint(item.getKey(), (String)item.getValue());
+                        AverageFootprint value;
+
+                        if (map.containsKey(item.getKey())) {
+                            value = map.get(item.getKey());
+                        } else {
+                            value = new AverageFootprint();
+                            map.put(item.getKey(), value);
+                        }
+                        value.footprint += itemFootprint;
+                        value.count++;
+                    }
+                }
+                observer.updateAfterRead(map);
             }
 
             @Override

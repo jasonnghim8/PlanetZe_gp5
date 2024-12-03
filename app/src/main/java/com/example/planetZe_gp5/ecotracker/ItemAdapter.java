@@ -31,8 +31,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = itemList.get(position);
-        holder.text.setText(LocalData.ETGetString(item.key));
+        holder.text.setText(LocalData.ETGetValue(item.key));
         holder.value.setText(item.value);
+        holder.footprint.setText("" + Calculation.calculateFootprint(item.key, item.value));
         holder.value.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
@@ -66,13 +67,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
-        TextView text, value;
+        TextView text, value, footprint;
         Chip chipSelect;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            text = itemView.findViewById(R.id.keyText);
+            text = itemView.findViewById(R.id.name);
             value = itemView.findViewById(R.id.editValue);
+            footprint = itemView.findViewById(R.id.textFootprint);
             chipSelect = itemView.findViewById(R.id.chip);
         }
     }
