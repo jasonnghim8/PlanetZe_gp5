@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5;
+package com.example.planetZe_gp5.login_registration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.planetZe_gp5.MainActivity;
+import com.example.planetZe_gp5.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AdditionalUserInfo;
@@ -41,46 +43,15 @@ public class LoginActivity extends AppCompatActivity {
         signupRedirectText = findViewById(R.id.signupRedirectText);
         forgotPasswordText = findViewById(R.id.forgot_password_text);
 
+        LoginModel loginModel = new LoginModel(auth, LoginActivity.this);
+        LoginPresenter loginPresenter = new LoginPresenter(loginEmail, loginPassword, auth,LoginActivity.this, loginModel);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                String email = loginEmail.getText().toString();
-                String pass = loginPassword.getText().toString();
-
-                if (!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    if (!pass.isEmpty()){
-                        auth.signInWithEmailAndPassword(email, pass)
-                                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                                    @Override
-                                    public void onSuccess(AuthResult authResult) {
-                                        Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                                        AdditionalUserInfo additionalUserInfo = authResult.getAdditionalUserInfo();
-                                        boolean isNew = false;
-                                        if (additionalUserInfo != null){
-                                            isNew = authResult.getAdditionalUserInfo().isNewUser();
-                                        }
-                                        if(isNew){
-                                            startActivity(new Intent(LoginActivity.this, FirstTimeUserSetup.class));
-                                        }
-                                        else{
-                                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                        }
-
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    } else {
-                        loginPassword.setError("Password cannot be empty");
-                    }
-                } else if (email.isEmpty()){
-                    loginEmail.setError("Email cannot be empty");
-                } else {
-                    loginEmail.setError("Please enter valid email");
-                }
+                String email = loginEmail.getText().toString().trim();
+                String pass = loginPassword.getText().toString().trim();
+                loginPresenter.loginWithEmailAndPassword(email, pass);
             }
         });
 
