@@ -32,6 +32,9 @@
             android:name=".acf.CountrySelection"
             android:exported="true" />
         <activity
+            android:name=".EcoHubActivity"
+            android:exported="true"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true" />
     </application>
