@@ -27,18 +27,7 @@ public class LoginModel {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         Toast.makeText(loginContext, "Login Successful!", Toast.LENGTH_SHORT).show();
-                        AdditionalUserInfo additionalUserInfo = authResult.getAdditionalUserInfo();
-                        boolean isNew = false;
-                        Activity ac = new Activity();
-                        if (additionalUserInfo != null){
-                            isNew = additionalUserInfo.isNewUser();
-                        }
-                        if(isNew){
-                            loginContext.startActivity(new Intent(loginContext, FirstTimeUserSetup.class));
-                        }
-                        else{
-                            loginContext.startActivity(new Intent(loginContext, MainActivity.class));
-                        }
+                        loginContext.startActivity(new Intent(loginContext, MainActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
