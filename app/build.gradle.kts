@@ -41,8 +41,13 @@ dependencies {
     // Chart and graph library
     implementation ("com.github.blackfizz:eazegraph:1.2.2@aar")
     implementation ("com.nineoldandroids:library:2.4.0")
+
     implementation(libs.firebase.database)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
+    testImplementation ("org.mockito:mockito-core:2.23.0")
+    testImplementation(libs.ext.junit)
+    testImplementation(libs.monitor)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
