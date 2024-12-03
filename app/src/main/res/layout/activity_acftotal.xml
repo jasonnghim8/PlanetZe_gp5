@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/navy">
 
     <TextView
         android:id="@+id/totalAcf"
@@ -13,6 +14,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginBottom="11dp"
         android:text="TextView"
+        android:textColor="@color/black"
         android:gravity="center"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/acfCont"

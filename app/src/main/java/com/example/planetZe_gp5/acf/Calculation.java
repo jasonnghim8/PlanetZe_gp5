@@ -14,7 +14,7 @@ public class Calculation implements Observer {
     public double housingCF;
     public double consumptionCF;
     public double totalCF;
-    private DataModel dbModel;
+    private final DataModel dbModel;
 
     private Calculation(){
         dbModel = DataModel.getInstance();
@@ -38,6 +38,7 @@ public class Calculation implements Observer {
         String housingCFValue = (String) valueRead;
         housingCF += Double.parseDouble(housingCFValue);
         housingCF *= 0.001;
+        housingCF = Math.max(0, housingCF); // carbon footprint should always be positive!!
 
         dbModel.writeUserData("annualCarbonFootprint/Housing", housingCF);
 
@@ -54,6 +55,7 @@ public class Calculation implements Observer {
         cf += calculatePT(input);
         cf += calculateFlight(input);
         cf = cf * 0.001;
+        cf = Math.max(0, cf);
         dbModel.writeUserData("annualCarbonFootprint/transportation", cf);
         return cf;
     }
@@ -179,6 +181,7 @@ public class Calculation implements Observer {
                 calculateChicken(input) + calculateSeafood(input) +
                 calculateLeftover(input);
         cf = cf * 0.001;
+        cf = Math.max(0, cf);
         dbModel.writeUserData("annualCarbonFootprint/Food", cf);
         return cf;
     }
@@ -306,6 +309,7 @@ public class Calculation implements Observer {
         cf += calculateDevice(device);
         cf -= calculateRecycle(recycle, clothes, device);
         cf = cf * 0.001;
+        cf = Math.max(0, cf);
         dbModel.writeUserData("annualCarbonFootprint/Consumption", cf);
         return cf;
     }
