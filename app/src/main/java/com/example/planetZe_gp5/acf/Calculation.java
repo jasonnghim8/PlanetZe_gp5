@@ -173,7 +173,7 @@ public class Calculation implements Observer {
         int diet = input.get("8");
         // pls switch the order of vegetarian and vegan for simplicity
         if (diet < 4) {
-            double cf = 500 * diet + calculateLeftover(input);
+            double cf = (500 * diet + calculateLeftover(input)) * 0.001;
             dbModel.writeUserData("annualCarbonFootprint/Food", cf);
             return cf;
         }

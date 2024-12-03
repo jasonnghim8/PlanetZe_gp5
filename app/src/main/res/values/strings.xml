@@ -4,13 +4,18 @@
     <string name="buttonLogin">Login</string>
     <string name="buttonEcoGauge">Eco Gauge</string>
     <string name="continued">continue</string>
+    <string name="start">get started</string>
+    <string name="welcome">Welcome to PlanetZe!\nLet\'s get started!</string>
+    <string name="welcomeMessage">We will calculate your annual carbon footprint based on
+    your lifestyles.\nYou only need to do this once!</string>
     <string name="country_select">Please select your country below</string>
     <string name="acfResult">Your Annual Carbon Footprint is:</string>
     <string name="transport">transportation</string>
     <string name="food">food</string>
     <string name="housing">housing</string>
     <string name="consumption">consumption</string>
-    <string name="acfResult2">Your Annual Carbon Footprint for each category (in tons):</string>
+    <string name="waiting">updating data</string>
+    <string name="acfResult2">Your Annual Carbon Footprint for each category (in %):</string>
     <string name="delete_item">Delete Item</string>
     <string name="add_item">Add</string>
     <string name="save">Save Edits</string>

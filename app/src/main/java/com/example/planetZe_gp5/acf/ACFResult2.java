@@ -34,10 +34,14 @@ public class ACFResult2 extends AppCompatActivity {
 
         Calculation cal = Calculation.getInstance();
 
-        tvTransport.setText(String.valueOf(100*cal.transportCF/cal.totalCF));
-        tvFood.setText(String.valueOf(100*cal.foodCF/cal.totalCF));
-        tvHouse.setText(String.valueOf(100*cal.housingCF/cal.totalCF));
-        tvConsume.setText(String.valueOf(100*cal.consumptionCF/cal.totalCF));
+        double transportPercent = Math.round(10000.0*cal.transportCF/cal.totalCF)/100.0;
+        tvTransport.setText(String.valueOf(transportPercent));
+        double FoodPercent = Math.round(10000.0*cal.foodCF/cal.totalCF)/100.0;
+        tvFood.setText(String.valueOf(FoodPercent));
+        double HousingPercent = Math.round(10000.0*cal.housingCF/cal.totalCF)/100.0;
+        tvHouse.setText(String.valueOf(HousingPercent));
+        double consumptionPercent = Math.round(10000.0*cal.consumptionCF/cal.totalCF)/100.0;
+        tvConsume.setText(String.valueOf(consumptionPercent));
 
        int color = ContextCompat.getColor(this, R.color.blue);
        pieChart.addPieSlice(new PieModel("transportation",

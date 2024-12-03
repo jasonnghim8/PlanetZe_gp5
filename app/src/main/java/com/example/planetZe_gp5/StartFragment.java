@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.planetZe_gp5.acf.ACFQuestion;
 import com.example.planetZe_gp5.acf.ACFResults;
 import com.example.planetZe_gp5.acf.CountrySelection;
+import com.example.planetZe_gp5.acf.Welcome;
 import com.example.planetZe_gp5.ecotracker.EcoTrackerMainFragment;
 
 public class StartFragment extends Fragment {
@@ -38,7 +39,7 @@ public class StartFragment extends Fragment {
         buttonACF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), CountrySelection.class);
+                Intent intent = new Intent(getContext(), Welcome.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 startActivity(intent);
             }

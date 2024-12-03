@@ -82,26 +82,31 @@ public class ACFResults3 extends AppCompatActivity implements Observer {
 
         // update page now that we have both values
         double countryCf = (double) valueRead;
+        countryCf = Math.round(countryCf*100.0)/100.0;
+        double cfRounded = Math.round(cf*100.0)/100.0;
 
-        String cfResult = "Your current carbon footprint is" + cf;
+        String cfResult = "Your current carbon footprint is " + cfRounded + " tonnes";
         result.setText(cfResult);
 
-        String compare = "Your country/region average is " + countryCf;
-        double diff = countryCf - cf;
-        double diffPercent = Math.abs(diff)/countryCf;
+        String compare = "Your country/region average is " + countryCf + " tonnes";
+        double diff = cf - countryCf;
+        double diffPercent = Math.abs(diff)/countryCf*100;
+        diffPercent = Math.round(diffPercent*100.0)/100.0;
 
         String compare2 = "Your carbon footprint is " + diffPercent + "% " + compareString(diff);
-        compare2 = compare2 + " the national average for" + userArea;
+        compare2 = compare2 + " the national average for " + userArea;
 
         compare = compare + "\n" + compare2;
         region.setText(compare);
 
         String compareGb = "The global average is 2 tonnes";
-        double diffGb = 2 - cf;
-        double diffPercentGb = Math.abs(diffGb)/countryCf;
+        double diffGb = cf - 2;
+        double diffPercentGb = Math.abs(diffGb)/countryCf*100;
+        diffPercentGb = Math.round(diffPercentGb*100.0)/100.0;
 
-        String compare3 = "Your carbon footprint is " + diffPercentGb + "% " + compareString(diffGb) + " the global average";
-        compare3 =compareGb + "\n" + compare3;
+        String compare3 = "Your carbon footprint is " + diffPercentGb + "% "
+                + compareString(diffGb) + " the global average";
+        compare3 = compareGb + "\n" + compare3;
         global.setText(compare3);
     }
 }
