@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5;
+package com.example.planetZe_gp5.login_registration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.planetZe_gp5.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

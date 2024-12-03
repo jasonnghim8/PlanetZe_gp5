@@ -1,4 +1,4 @@
-package com.example.planetZe_gp5;
+package com.example.planetZe_gp5.login_registration;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.planetZe_gp5.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,28 +34,14 @@ public class ForgotPassword extends AppCompatActivity {
         sendEmailButton = findViewById(R.id.send_email_button);
         returnButton = findViewById(R.id.return_button);
 
+        LoginModel model = new LoginModel(auth, ForgotPassword.this);
+        LoginPresenter presenter = new LoginPresenter(emailText, null, auth, ForgotPassword.this, model);
+
         sendEmailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = emailText.getText().toString().trim();
-                if (email.isEmpty()) {
-                    emailText.setError("Email cannot be empty");
-                    return;
-                }
-                auth.sendPasswordResetEmail(email)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(ForgotPassword.this, "Reset Password link has been sent to your registered Email", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(ForgotPassword.this, LoginActivity.class));
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(ForgotPassword.this, "Error :- " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                presenter.resetPassword(email);
             }
         });
 
