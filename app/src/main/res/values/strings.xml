@@ -30,6 +30,14 @@
     <string name="manage_items">Manage Items</string>
     <string name="textView4">Select a Date:</string>
 
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="already_a_user_login">Already a user? Login!</string>
+    <string name="password">Password</string>
+    <string name="not_registered_sign_up">Not registered? Sign Up!</string>
+
+    <string-array name="emptyArray"></string-array>
+
     <string name="habit_tracker_button">Habit Tracker</string>
     <string name="habit_name">Habit Name</string>
     <string name="habit_description">Habit Description</string>
@@ -40,9 +48,6 @@
     <string name="chip_transportation">Transportation</string>
     <string name="chip_food">Food</string>
     <string name="chip_consumption">Consumption and Shopping</string>
-
-    <string-array name="emptyArray">
-    </string-array>
 
     <string-array name="categories">
         <item>Transportation</item>
