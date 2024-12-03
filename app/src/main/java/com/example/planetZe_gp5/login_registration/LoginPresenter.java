@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.PatternsCompat;
 
 import com.example.planetZe_gp5.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,31 +32,33 @@ public class LoginPresenter {
         this.loginContext = loginContext;
         this.loginModel = loginModel;
     }
-    public void loginWithEmailAndPassword(String email, String pass){
+    public boolean loginWithEmailAndPassword(String email, String pass){
         if(email.isEmpty()){
             loginEmail.setError("Email cannot be empty");
-            return;
-        }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            loginEmail.setError("Please enter valid email");
-            return;
+            return false;
         }
         if(pass.isEmpty()){
             loginPassword.setError("Password cannot be empty");
-            return;
+            return false;
+        }
+        if(!PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()){
+            loginEmail.setError("Please enter valid email");
+            return false;
         }
         loginModel.loginUsingEmailPassword(email, pass);
+        return true;
     }
 
-    public void resetPassword(String email){
+    public boolean resetPassword(String email){
         if(email.isEmpty()){
             loginEmail.setError("Email cannot be empty");
-            return;
+            return false;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if(!PatternsCompat.EMAIL_ADDRESS.matcher(email).matches()){
             loginEmail.setError("Please enter valid email");
-            return;
+            return false;
         }
         loginModel.resetPassword(email);
+        return true;
     }
 }
