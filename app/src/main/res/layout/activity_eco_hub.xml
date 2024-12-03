@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#f5f5f5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvEcoHubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eco Hub"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Learning Resources"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvUNSustainableGoals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UN Sustainable Development Goals (SDGs)"
+            android:textColor="#0000FF"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvCleanTechnica"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CleanTechnica - Green Technologies"
+            android:textColor="#0000FF"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvEarth911"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Earth911 - Sustainable Living Tips"
+            android:textColor="#0000FF"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Market Trends"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Energy-Efficient Appliances"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvEnergyEfficientCanada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ENERGY STAR Canada Appliances"
+            android:textColor="#0000FF"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvEnergyEfficientGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Energy-Efficient Appliances: A Guide to Eco-Friendly Living"
+            android:textColor="#0000FF"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sustainable Fashion"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvFrankAndOak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frank and Oak"
+            android:textColor="#0000FF"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvGoodForSunday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Good for Sunday"
+            android:textColor="#0000FF"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Green Home Solutions"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/tvSmartThermostats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Smart Thermostats"
+            android:textColor="#0000FF"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvSmartLED"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Smart LED Light Bulbs"
+            android:textColor="#0000FF"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+    </LinearLayout>
+</ScrollView>
