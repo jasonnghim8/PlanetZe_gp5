@@ -43,6 +43,19 @@ After the registration, the app will have the following user flow:
     * For the methods for calculating each parts, except for housing, it will first check if the corresponding key is present in the HashMap, then depends on the cases to write the data onto the database and return the value (in tonnes). For some parts with smaller sub-parts, similar methods are invoked.
     * For the calculate housing method, it will first get the id according to the inputs, which is computed based on the data on the database. Then it will search the emission data from the database then write it on the database (under the user) and return (in tonnes).
     * After all 4 subset are calculated, the total value is then summed up and stored to the database.
+EcoHubActivity class:
+   * provides a hub of eco-friendly resources with clickable links to different sustainability websites by navigating the EcoHubActivity and tapping links which connect to the corresponding website
+   * developers can update the URLs by editing the setUpLink() in onCreate(),or adding a TextView in the activity_eco_hub.xml and registering the TextView in the setUpLink() by adding a new call with the new id and URL
+   * setUpLink(int textViewId, String url): attaches a ClickListener to a TextView to open the provided URL in browser
+   * openUrl(String url): launches an intent to open the specified URL in the device's web browser
+   * AppCompatActivity, TextView, Intent.ACTION_VIEW: these dependencies provide support for creating and managing the UI and browser navigation
+Splash_screen class:
+   * the Splash_screen activity displays a splash screen for 3 seconds before transitioning to the main application screen
+   * developers can change the splash screen duration by adjusting the 3000 milliseconds in the postDelayed(), and changing the next activity by replacing MainActivity in the Intent with another activity
+   * Handler().postDelayed(Runnable, long delayMillis): schedules the transition from the splash screen to the main activity after 3 seconds
+   * Intent, finish(): launches the MainActivity once the splash screen ends and removes the splash screen
+   * AppCompatActivity, Handler: these dependencies provide support for handling UI and activity transition
+
 
 Added dependencies:
 One dependency is added for the card view for holding the pie chart. Another is added to compute the pie chart.
