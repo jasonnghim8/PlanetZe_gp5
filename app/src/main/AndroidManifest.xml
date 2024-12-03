@@ -34,6 +34,9 @@
             android:name=".Activity2"
             android:exported="false" />
         <activity
+            android:name=".EcoHubActivity"
+            android:exported="true"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
