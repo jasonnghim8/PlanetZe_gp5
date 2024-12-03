@@ -52,9 +52,9 @@ After the registration, the app will have the following user flow:
    * AppCompatActivity, TextView, Intent.ACTION_VIEW: these dependencies provide support for creating and managing the UI and browser navigation
 
 9. Splash_screen class:
-   * the Splash_screen activity displays a splash screen for 3 seconds before transitioning to the main application screen
-   * developers can change the splash screen duration by adjusting the 3000 milliseconds in the postDelayed(), and changing the next activity by replacing MainActivity in the Intent with another activity
-   * Handler().postDelayed(Runnable, long delayMillis): schedules the transition from the splash screen to the main activity after 3 seconds
+   * the Splash_screen activity displays a splash screen for 2 seconds before transitioning to the main application screen
+   * developers can change the splash screen duration by adjusting the 2000 milliseconds in the postDelayed(), and changing the next activity by replacing MainActivity in the Intent with another activity
+   * Handler().postDelayed(Runnable, long delayMillis): schedules the transition from the splash screen to the main activity after 2 seconds
    * Intent, finish(): launches the MainActivity once the splash screen ends and removes the splash screen
    * AppCompatActivity, Handler: these dependencies provide support for handling UI and activity transition
 
