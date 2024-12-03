@@ -1,5 +1,10 @@
 package com.example.planetZe_gp5;
 
+import com.example.planetZe_gp5.ecotracker.Habit;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public final class LocalData {
     private static String userid;
 
@@ -75,28 +80,64 @@ public final class LocalData {
     };//have created four answer for question 9 if number 8 chose meat
 
     // Eco tracker data.
-    static final String[][] ETQuestions = {
-            {"Distance driven in km", "Time spent in hours", "Distance driven in km"},
-            {"Number of servings consumed"},
-            {"Number of clothing items purchased", "Number of devices purchased", "Number of purchases", "Amount of the bill in dollars"}};
+    public static final String[][][] ETQuestions = {
+            {
+                    {"Distance driven in km", "Time spent in hours", "Distance driven in km"},
+                    {"010", "011", "012"},
+                    {"020", "021", "022"}
+            },
+            {
+                    {"Number of servings consumed"},
+                    {"110", "111", "112"},
+                    {"120", "121", "122"}
+            },
+            {
+                    {"Number of clothing items purchased", "Number of devices purchased", "Number of purchases", "Amount of the bill in dollars"},
+                    {"210", "211", "212"},
+                    {"220", "221", "222"}
+            }};
 
-    public static String ETGetString(int i, int j) {
-        // some categories have the same question despite j spinner position
-        if (j >= LocalData.ETQuestions[i].length) {
-            j = LocalData.ETQuestions[i].length - 1;
-        }
-        if (i >= 0 && j >= 0) {
-            return LocalData.ETQuestions[i][j];
-        }
-        return "";
-    }
-    public static long calendarDate;
+    public static final String[][][] ETValues = {
+            {
+                    {"Car driven km:", "001", "002"},
+                    {"010", "011", "012"},
+                    {"020", "021", "022"}
+            },
+            {
+                    {"Number of servings consumed"},
+                    {"110", "111", "112"},
+                    {"120", "121", "122"}
+            },
+            {
+                    {"Number of clothing items purchased", "Number of devices purchased", "Number of purchases", "Amount of the bill in dollars"},
+                    {"210", "211", "212"},
+                    {"220", "221", "222"}
+            }};
 
-    public static String ETGetString(String ijk) {
+    public static String ETGetValue(String ijk) {
         int i = (int)ijk.charAt(0) - '0';
         int j = (int)ijk.charAt(1) - '0';
-        return LocalData.ETGetString(i, j);
+        int k = (int)ijk.charAt(2) - '0';
+        return LocalData.ETValues[i][j][k];
     }
+
+    public static final int TRANSPORTATION = 0;
+    public static final int FOOD = 1;
+    public static final int CONSUMPTION = 2;
+    public static List<Habit> habitList;
+    public static List<Habit> allHabitsList;
+
+    public static void initializeHabitList() {
+        if (habitList != null) {
+            return;
+        }
+        habitList = new ArrayList<>();
+        habitList.add(new Habit("name1", "description1", FOOD, 10, new String[]{"010", "011"}));
+        habitList.add(new Habit("name2", "description2", TRANSPORTATION, 10, new String[]{"000", "001"}));
+        allHabitsList = new ArrayList<>(habitList);
+    }
+
+    public static long calendarDate;
 
     public static String getUserid() {
         return LocalData.userid;

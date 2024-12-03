@@ -27,9 +27,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class EcoTrackerMainFragment extends Fragment {
-    ImageButton buttonAdd;
-    ImageButton buttonDelete;
-    Button buttonSave;
+    ImageButton buttonAdd, buttonDelete;
+    Button buttonSave, buttonHabitTracker;
     CalendarView calendarView;
     DataModel dbModel;
     private RecyclerView recyclerView;
@@ -47,6 +46,7 @@ public class EcoTrackerMainFragment extends Fragment {
         buttonDelete = view.findViewById(R.id.buttonDelete);
         buttonSave = view.findViewById(R.id.buttonSave);
         calendarView = view.findViewById(R.id.calendarView);
+        buttonHabitTracker = view.findViewById(R.id.buttonHabitTracker);
 
         itemList = new ArrayList<>();
         itemAdapter = new ItemAdapter(itemList);
@@ -87,6 +87,13 @@ public class EcoTrackerMainFragment extends Fragment {
                 dbModel.setEcoTrackerPath(year + "-" + (month + 1) + "-" + day);
                 dbModel.listTrackerValues(itemList, itemAdapter);
                 LocalData.calendarDate = new GregorianCalendar(year, month, day).getTimeInMillis();
+            }
+        });
+
+        buttonHabitTracker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new HabitTrackerFragment());
             }
         });
 
