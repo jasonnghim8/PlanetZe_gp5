@@ -1,79 +1,156 @@
 package com.example.planetZe_gp5;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
+import com.example.planetZe_gp5.ecotracker.AverageFootprint;
+import com.example.planetZe_gp5.ecotracker.Calculation;
+import com.example.planetZe_gp5.ecotracker.Item;
+import com.example.planetZe_gp5.ecotracker.ItemAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.List;
 
-public class DataModel {
+final public class DataModel {
+    private static DataModel dbModel;
     private final FirebaseDatabase db;
+    private DatabaseReference ref;
+    private String userPath;
+    private String ecoTrackerPath;
 
-    private DatabaseReference itemsRef;
-
-    public DataModel() {
+    private DataModel() {
         db = FirebaseDatabase.getInstance("https://planetze--group-5-default-rtdb.firebaseio.com/");
+        ecoTrackerPath = "ecotracker/";
     }
 
-    /**
-     * store the value of the given path in a list.
-     * @param path the path to a key.
-     * @param list string array list to store the value.
-     */
-    public void readValue(String path, List<String> list) {
-        itemsRef = db.getReference(path);
-        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue().toString();
-                list.add(value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle possible errors
-            }
-        });
+    public static DataModel getInstance() {
+        if (dbModel == null) {
+            dbModel = new DataModel();
+        }
+        return dbModel;
     }
 
-    /**
-     * store values for all keys in list for a given path.
-     * @param path path to key value pairs.
-     * @param list string array list to store the values.
-     */
-    public void readData(String path, List<String> list) {
-        itemsRef = db.getReference(path);
-        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String value = snapshot.getValue().toString();
-                    list.add(value);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle possible errors
-            }
-        });
-    }
-
-    public void readItemData(String path, List<Item> itemList, ItemAdapter itemAdapter) {
-        itemsRef = db.getReference(path);
-        itemsRef.addValueEventListener(new ValueEventListener() {
+    public void readValue(String path, Observer observer) {
+        ref = db.getReference(path);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                itemList.clear();
+                Object obj = dataSnapshot.getValue();
+                String value = "";
+                if (obj != null) {
+                    value = obj.toString();
+                }
+                observer.updateAfterRead(value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle possible errors
+            }
+        });
+    }
+
+    public void readUserValue(String path, Observer observer) {
+        readValue(userPath + path, observer);
+    }
+
+    public void readValueOnChange(String path, Observer observer) {
+        ref = db.getReference(path);
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Object obj = snapshot.getValue();
+                String value = "";
+                if (obj != null) {
+                    value = obj.toString();
+                }
+                observer.updateAfterRead(value);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void readUserValueOnChange(String path, Observer observer) {
+        readValueOnChange(userPath + path, observer);
+    }
+
+    /**
+     * store values for key "target" in list that has the same value of "object" for key "key.
+     * @param path path to key value pairs.
+     * @param observer observer to notify when reading is done.
+     */
+    public void searchCorrData(String path, Observer observer, String key, String object,
+                               String target){
+        ref = db.getReference(path);
+        ref.orderByChild(key).equalTo(object).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot branchSnapshot : snapshot.getChildren()) {
+                            double value = (double) branchSnapshot.child(target).getValue();
+                            observer.updateAfterRead(value);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }
+        );
+    }
+
+    public void listTrackerValues(List<Item> list, ItemAdapter itemAdapter) {
+        ref = db.getReference(userPath + ecoTrackerPath);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Item item = snapshot.getValue(Item.class);
-                    itemList.add(item);
+                    Item item = new Item(snapshot.getKey(), (String) snapshot.getValue());
+                    list.add(item);
                 }
                 itemAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors
+            }
+        });
+    }
+
+    public void readAllItemFootprints(HashMap<String, AverageFootprint> map, Observer observer) {
+        ref = db.getReference(userPath + "ecotracker/");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        double itemFootprint = Calculation.calculateFootprint(item.getKey(), (String)item.getValue());
+                        AverageFootprint value;
+
+                        if (map.containsKey(item.getKey())) {
+                            value = map.get(item.getKey());
+                        } else {
+                            value = new AverageFootprint();
+                            map.put(item.getKey(), value);
+                        }
+                        value.footprint += itemFootprint;
+                        value.count++;
+                    }
+                }
+                observer.updateAfterRead(map);
             }
 
             @Override
@@ -88,54 +165,31 @@ public class DataModel {
         myRef.setValue(value);
     }
 
-    /**
-     * Add an item to the FireBase database.
-     * @param path the path where the item will be added example "users/countries/".
-     * @param title
-     * @param author
-     * @return true if and only if item is added.
-     */
-    public boolean writeData(String path, String title, String author) {
-        itemsRef = db.getReference(path);
-        String id = itemsRef.push().getKey();
-        if (id == null) {
-            return false;
-        }
-        Item item = new Item(id, title, author);
-        itemsRef.child(id).setValue(item);
-        return true;
+    public void writeUserData(String path, Object value) {
+        writeData(userPath + path, value);
     }
 
-    /**
-     * Deletes an item. Currently returns true every time.
-     * @param path the path in the database.
-     * @param title title of the item to delete.
-     * @return true if and only if item is deleted.
-     */
-    public boolean deleteData(String path, String title) {
-        itemsRef = db.getReference(path);
-        itemsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean itemFound = false;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Item item = snapshot.getValue(Item.class);
-                    if (item != null && item.getUser().equalsIgnoreCase(title)) {
-                        snapshot.getRef().removeValue();
-                        itemFound = true;
-                        break;
-                    }
-                }
-                if (!itemFound) {
-//                   Toast.makeText(getContext(), "Item not found", Toast.LENGTH_SHORT).show();
-                }
-            }
+    public void writeEcoTrackerData(String path, Object value) {
+        writeUserData(ecoTrackerPath + "/" + path, value);
+    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(getContext(), "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        return true;
+    public void deleteEntry(String path, String key) {
+        db.getReference(path + "/" + key).removeValue();
+    }
+
+    public void deleteUserEntry(String path, String key) {
+        deleteEntry(userPath + path, key);
+    }
+
+    public void setUserPath(String userid) {
+        userPath = "users/" + userid + "/";
+    }
+
+    public String getEcoTrackerPath() {
+        return ecoTrackerPath;
+    }
+
+    public void setEcoTrackerPath(String path) {
+        ecoTrackerPath = "ecotracker/" + path;
     }
 }

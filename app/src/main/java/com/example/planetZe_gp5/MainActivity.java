@@ -7,16 +7,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
-
-    DataModel dbModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        dbModel = new DataModel();
-//        dbModel.writeData("testDemo/movies", "B07 Demo!");
+        LocalData.setUserid("test"); // change this when log in part is added
 
         if (savedInstanceState == null) {
             loadFragment(new StartFragment());

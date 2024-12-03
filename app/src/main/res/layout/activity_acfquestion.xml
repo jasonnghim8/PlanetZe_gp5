@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
+
+        <!-- Question Text -->
+        <TextView
+            android:id="@+id/question_text"
+            android:layout_width="match_parent"
+            android:layout_height="181dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Question will be displayed here"
+            android:textColor="#000000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!-- Answer Buttons Container -->
+        <LinearLayout
+            android:id="@+id/answer_buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="368dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" />
+    </LinearLayout>
+</ScrollView>

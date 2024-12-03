@@ -1,18 +1,133 @@
 <resources>
-    <string name="app_name">B07 Demo Summer 2024</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">PlanetZe</string>
+    <string name="buttonACF">ACF Select Country</string>
+    <string name="buttonLogin">Login</string>
+    <string name="buttonEcoGauge">Eco Gauge</string>
+    <string name="continued">continue</string>
+    <string name="country_select">Please select your country below</string>
+    <string name="acfResult">Your Annual Carbon Footprint is:</string>
+    <string name="transport">transportation</string>
+    <string name="food">food</string>
+    <string name="housing">housing</string>
+    <string name="consumption">consumption</string>
+    <string name="acfResult2">Your Annual Carbon Footprint for each category (in tons):</string>
     <string name="delete_item">Delete Item</string>
-    <string name="add_item">Add Item</string>
+    <string name="add_item">Add</string>
+    <string name="save">Save Edits</string>
+    <string name="key">Key</string>
+    <string name="footprint">000</string>
+
+    <string name="next">Next</string>
     <string name="back">Back</string>
-    <string name="recyclerview">RecyclerView</string>
+    <string name="recyclerview">View Items</string>
     <string name="scroller">Scroller</string>
     <string name="spinner">Spinner</string>
     <string name="manage_items">Manage Items</string>
+    <string name="textView4">Select a Date:</string>
 
-    <string-array name="categories_array">
-        <item>Books</item>
-        <item>Movies</item>
+    <string name="habit_tracker_button">Habit Tracker</string>
+    <string name="habit_name">Habit Name</string>
+    <string name="habit_description">Habit Description</string>
+    <string name="carbon_offset">Carbon Offset</string>
+
+    <string name="filter_by">Filter By:</string>
+    <string name="chip_impact">Offset Impact</string>
+    <string name="chip_transportation">Transportation</string>
+    <string name="chip_food">Food</string>
+    <string name="chip_consumption">Consumption and Shopping</string>
+
+    <string-array name="emptyArray">
+    </string-array>
+
+    <string-array name="categories">
+        <item>Transportation</item>
+        <item>Food</item>
+        <item>Consumption and Shopping</item>
+    </string-array>
+
+    <string-array name="categoryTransportation">
+        <item>Personal Vehicle</item>
+        <item>Public Transportation</item>
+        <item>Cycling or Walking</item>
+        <item>Flight</item>
+    </string-array>
+
+    <string-array name="categoryPersonalVehicle">
+        <item>Gasoline</item>
+        <item>Diesel</item>
+        <item>Hybrid</item>
+        <item>Electric</item>
+        <item>I do not know</item>
+    </string-array>
+
+    <string-array name="categoryPublicTransportation">
+        <item>Bus</item>
+        <item>Subway</item>
+        <item>Train</item>
+    </string-array>
+
+    <string-array name="categoryFlight">
+        <item>Short-Haul(less than 1,500km)</item>
+        <item>Long-Haul(more than 1,500km)</item>
+    </string-array>
+
+    <string-array name="categoryFood">
+        <item>Beef</item>
+        <item>Pork</item>
+        <item>Chicken</item>
+        <item>Fish</item>
+        <item>Plant-Based</item>
+    </string-array>
+
+    <string-array name="categoryExpenses">
+        <item>Clothes</item>
+        <item>Electronics</item>
+        <item>Other Purchases</item>
+        <item>Energy Bills</item>
+    </string-array>
+
+    <string-array name="categoryElectronics">
+        <item>Smartphone</item>
+        <item>Laptop</item>
+        <item>TV</item>
+    </string-array>
+
+    <string-array name="categoryEnergyBills">
+        <item>Gas</item>
+        <item>Electricity</item>
+        <item>Water</item>
+    </string-array>
+
+    <string-array name="categoryOther">
+        <item>Furniture</item>
+        <item>Appliances</item>
+    </string-array>
+
+    <string-array name="questions">
+        <item>Do you own or regularly use a car?</item>
+        <item>What type of car do you drive?</item>
+        <item>How many kilometers/miles do you drive per year?</item>
+        <item>How often do you use public transportation (bus, train, subway)?</item>
+        <item>How much time do you spend on public transportation per week (bus, train, subway)?</item>
+        <item> How many short-haul flights (less than 1,500 km / 932 miles) have you taken in the past year?</item>
+        <item>How many long-haul flights (more than 1,500 km / 932 miles) have you taken in the past year?</item>
+        <item>What best describes your diet?</item>
+        <item>How often do you eat beef?</item>
+        <item>How often do you eat pork?</item>
+        <item>How often do you eat chicken?</item>
+        <item>How often do you eat fish or seafood?</item>
+        <item>How often do you waste food or throw away uneaten leftovers?</item>
+        <item>What type of home do you live in?</item>
+        <item>How many people live in your household?</item>
+        <item>What is the size of your home?</item>
+        <item>What type of energy do you use to heat your home?</item>
+        <item>What is your average monthly electricity bill?</item>
+        <item>What type of energy do you use to heat water in your home?</item>
+        <item>Do you use any renewable energy sources for electricity or heating (e.g., solar, wind)?</item>
+        <item>How often do you buy new clothes?</item>
+        <item>Do you buy second-hand or eco-friendly products?</item>
+        <item>How many electronic devices (phones, laptops, etc.) have you purchased in the past year?</item>
+        <item>How often do you recycle?</item>
     </string-array>
 
 
