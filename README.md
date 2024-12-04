@@ -68,6 +68,9 @@ After the registration, the app will have the following user flow:
    * Intent, finish(): launches the MainActivity once the splash screen ends and removes the splash screen
    * AppCompatActivity, Handler: these dependencies provide support for handling UI and activity transition
 
+10. EcoGauge class:
+   * Provides a dashboard showing the user's carbon emission by category
+   * Lets user compare their emission data with national and global averages
 
 Added dependencies:
 One dependency is added for the card view for holding the pie chart. Another is added to compute the pie chart.

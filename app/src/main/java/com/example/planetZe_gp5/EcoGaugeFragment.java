@@ -189,7 +189,8 @@ public class EcoGaugeFragment extends Fragment implements Observer {
         cartesian.legend().padding(0d, 0d, 10d, 0d);
 
         // horizontal line
-        cartesian.annotations().horizontalLine(horizontalLinePos).valueAnchor("14.98");
+        cartesian.annotations().horizontalLine(horizontalLinePos).valueAnchor(String.valueOf(Calculation.getInstance().totalCF));
+
         anyChartView_line.setChart(cartesian);
     }
 
