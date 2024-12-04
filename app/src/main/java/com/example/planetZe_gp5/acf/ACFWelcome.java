@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.planetZe_gp5.R;
 
 
-public class Welcome extends AppCompatActivity {
+public class ACFWelcome extends AppCompatActivity {
     private TextView welcome;
     private TextView explain;
 
@@ -19,7 +19,7 @@ public class Welcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_acf_welcome);
 
         welcome = findViewById(R.id.welcome);
         explain = findViewById(R.id.message);
@@ -29,7 +29,7 @@ public class Welcome extends AppCompatActivity {
         explain.setText(R.string.welcomeMessage);
 
         start.setOnClickListener(v -> {
-            Intent intent1 = new Intent(Welcome.this, CountrySelection.class);
+            Intent intent1 = new Intent(ACFWelcome.this, CountrySelection.class);
             startActivity(intent1);
         });
     }

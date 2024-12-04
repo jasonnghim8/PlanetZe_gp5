@@ -33,7 +33,7 @@
             android:name=".acf.ACFQuestion"
             android:exported="true" />
         <activity
-            android:name=".acf.Welcome"
+            android:name=".acf.ACFWelcome"
             android:exported="true" />
         <activity
             android:name=".acf.ACFResults"
