@@ -53,6 +53,13 @@ public class StartFragment extends Fragment {
             }
         });
 
+        buttonEcoGauge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFragment(new EcoGaugeFragment());
+            }
+        });
+
         Toast.makeText(getContext(), "Don't Forget to log your habits!", Toast.LENGTH_LONG).show();
         return view;
     }
