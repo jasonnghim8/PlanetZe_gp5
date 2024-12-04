@@ -58,7 +58,6 @@ public class EcoTrackerAddItemFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 addItem();
-                loadFragment(new EcoTrackerMainFragment());
             }
         });
 
@@ -142,6 +141,7 @@ public class EcoTrackerAddItemFragment extends Fragment {
         }
         dbModel.writeEcoTrackerData(questionPath, text);
         Toast.makeText(getContext(), "Item added", Toast.LENGTH_SHORT).show();
+        loadFragment(new EcoTrackerMainFragment());
     }
 
     private void loadFragment(Fragment fragment) {
