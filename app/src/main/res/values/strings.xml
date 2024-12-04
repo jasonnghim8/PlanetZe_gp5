@@ -97,8 +97,8 @@
     <string-array name="categoryExpenses">
         <item>Clothes</item>
         <item>Electronics</item>
-        <item>Other Purchases</item>
         <item>Energy Bills</item>
+        <item>Other Purchases</item>
     </string-array>
 
     <string-array name="categoryElectronics">

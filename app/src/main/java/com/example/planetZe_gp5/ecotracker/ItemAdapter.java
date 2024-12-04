@@ -59,6 +59,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 item.selected = isChecked;
             }
         });
+
+        EcoTrackerMainFragment.updateTotalEmission(itemList);
     }
 
     @Override

@@ -75,7 +75,7 @@ public class SignupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(SignupActivity.this, "Signup Successful!", Toast.LENGTH_SHORT).show();
-                            LocalData.setUserid(email.substring(0, email.indexOf("@")));
+                            LocalData.setUserid(user.substring(0, user.indexOf("@")));
                             startActivity(new Intent(SignupActivity.this, FirstTimeUserSetup.class));
                         }
                         else{

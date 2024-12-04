@@ -78,11 +78,16 @@ public class EcoTrackerAddItemFragment extends Fragment {
                 updateQuestionText();
 
                 int spinner1Pos = spinner1.getSelectedItemPosition();
-                if (subSubCategories[spinner1Pos].length == 0
-                        || subSubCategories[spinner1Pos][position] == R.array.emptyArray) {
+                if (position == 3 && spinner1Pos == 2) {
+                    spinner3.setVisibility(View.VISIBLE);
+                    setupSpinner(spinner3, R.array.categoryOther);
+                } else if (subSubCategories[spinner1Pos].length == 0
+                        || subSubCategories[spinner1Pos][position] == R.array.emptyArray || (position == 0 && spinner1Pos == 2)) {
                     spinner3.setVisibility(View.GONE);
-                }
-                else {
+                } else if ((position == 1 || position == 2 || position == 3) && spinner1Pos == 2) {
+                    spinner3.setVisibility(View.VISIBLE);
+                    setupSpinner(spinner3, subSubCategories[spinner1Pos][position - 1]);
+                } else {
                     spinner3.setVisibility(View.VISIBLE);
                     setupSpinner(spinner3, subSubCategories[spinner1Pos][position]);
                 }
@@ -111,8 +116,13 @@ public class EcoTrackerAddItemFragment extends Fragment {
         int j = Math.max(spinner2.getSelectedItemPosition(), 0);
         int k = Math.max(spinner3.getSelectedItemPosition(), 0);
 
-        questionPath = (("" + i) + j) + k;
-        questionText.setText(LocalData.ETQuestions[i][j][k]);
+        if(i == 0 && j == 0) {
+            questionPath = (("" + i) + j) + k;
+            questionText.setText(LocalData.ETQuestions[i][j][0]);
+        }else {
+            questionPath = (("" + i) + j) + k;
+            questionText.setText(LocalData.ETQuestions[i][j][k]);
+        }
      }
 
     private void setupSpinner(Spinner spinner, int arrayID) {

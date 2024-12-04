@@ -82,36 +82,44 @@ public final class LocalData {
     // Eco tracker data.
     public static final String[][][] ETQuestions = {
             {
-                    {"Distance driven in km", "Time spent in hours", "Distance driven in km"},
-                    {"010", "011", "012"},
-                    {"020", "021", "022"}
+                    {"Distance driven in km"},
+                    {"Time spent on bus", "Time spent on Subway", "Time spent on Train"},
+                    {"Distance cycled or walked in km"},
+                    {"Distance of the flight"}
             },
             {
-                    {"Number of servings consumed"},
-                    {"110", "111", "112"},
-                    {"120", "121", "122"}
+                    {"Number of Beef Servings Consumed"},
+                    {"Number of Pork Servings Consumed"},
+                    {"Number of Chicken Servings Consumed"},
+                    {"Number of Fish Servings Consumed"},
+                    {"Number of Plant-Based Servings Consumed"}
             },
             {
                     {"Number of clothing items purchased", "Number of devices purchased", "Number of purchases", "Amount of the bill in dollars"},
-                    {"210", "211", "212"},
-                    {"220", "221", "222"}
+                    {"Number of Smartphone purchased", "Number of Laptop purchased", "Number of TV purchased"},
+                    {"Amount of the bill in dollars","Amount of the bill in dollars","Amount of the bill in dollars"},
+                    {"Number of appliances purchased", "Number of furniture purchased"}
             }};
 
     public static final String[][][] ETValues = {
             {
-                    {"Car driven km:", "001", "002"},
-                    {"010", "011", "012"},
-                    {"020", "021", "022"}
+                    {"Gasoline Car driven km:", "Diesel Car driven km:", "Hybrid Car driven km, Electric Car driven km, Car driven km"},
+                    {"Time spent on bus:", "Time spent on subway:", "Time spent on train:"},
+                    {"Distance cycled or walked in km:"},
+                    {"Flight distance:"}
             },
             {
-                    {"Number of servings consumed"},
-                    {"110", "111", "112"},
-                    {"120", "121", "122"}
+                    {"Number of Beef consumed"},
+                    {"Number of Pork consumed"},
+                    {"Number of Chicken consumed"},
+                    {"Number of Fish consumed"},
+                    {"Number of Plant-Based consumed"}
             },
             {
-                    {"Number of clothing items purchased", "Number of devices purchased", "Number of purchases", "Amount of the bill in dollars"},
-                    {"210", "211", "212"},
-                    {"220", "221", "222"}
+                    {"Number of clothing items purchased:", "Amount of the bill in dollars"},
+                    {"Number of Smartphone purchased", "Number of Laptop purchased", "Number of TV purchased" },
+                    {"Gas bill in dollars", "Electricity bill in dollars", "Water bill in dollars"},
+                    {"Number of furniture purchases", "Number of appliances purchases"}
             }};
 
     public static String ETGetValue(String ijk) {
@@ -132,10 +140,17 @@ public final class LocalData {
             return;
         }
         habitList = new ArrayList<>();
-        habitList.add(new Habit("name1", "description1", FOOD, 10, new String[]{"010", "011"}));
-        habitList.add(new Habit("name2", "description2", TRANSPORTATION, 10, new String[]{"000", "001"}));
+        habitList.add(new Habit("Cycling or walking", "Cycle or walk instead of using public transportation or personal vehicle.", TRANSPORTATION, 0,  new String[]{"000", "020"}));
+        habitList.add(new Habit("Eat plant-based", "Eating plant-based can significantly reduce carbon emission.", FOOD, 10, new String[]{"100", "140"}));
+        habitList.add(new Habit("Second hand clothes", "Buy second hand clothes instead of the new ones. Overconsumption is one of the biggest reasons for climate change. This will reduce the overconsumption and promotes recycling.", CONSUMPTION, 10, new String[]{"200", ""}));
+        habitList.add(new Habit("Second hand phone", "Each year, millions of phone are manufactured. The emission of the production of these phones are approximately 50 kg of C02. ", CONSUMPTION, 0, new String[]{"210", ""}));
+        habitList.add(new Habit("Second hand laptop", "Tons of water is being used for the production of the laptop chips. It will blow your mind if you learn how much the C02 produced by the production of the laptops. For better world get a second hand laptop.", CONSUMPTION, 0, new String[]{"211", ""}));
+        habitList.add(new Habit("Second hand TV", "Lot's of second hand TVs out there, get a second hand one, save the world!", CONSUMPTION, 0, new String[]{"212", ""}));
+        habitList.add(new Habit("Second hand furniture", "Recycling is a key for saving our world. Second hand furniture, less C02 emission!", CONSUMPTION, 0, new String[]{"230", ""}));
+        habitList.add(new Habit("Second hand appliances", "Get an old one, clean it and save the world.", CONSUMPTION, 0, new String[]{"231", ""}));
         allHabitsList = new ArrayList<>(habitList);
     }
+    public static double ETFootprintTotal;
 
     public static long calendarDate;
 

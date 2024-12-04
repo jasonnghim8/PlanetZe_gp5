@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ import java.util.Locale;
 public class EcoTrackerMainFragment extends Fragment {
     ImageButton buttonAdd, buttonDelete;
     Button buttonSave, buttonHabitTracker;
+    static TextView textTotal;
     CalendarView calendarView;
     DataModel dbModel;
     private RecyclerView recyclerView;
@@ -42,6 +44,7 @@ public class EcoTrackerMainFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        textTotal = view.findViewById(R.id.textTotal);
         buttonAdd = view.findViewById(R.id.buttonAdd);
         buttonDelete = view.findViewById(R.id.buttonDelete);
         buttonSave = view.findViewById(R.id.buttonSave);
@@ -87,6 +90,7 @@ public class EcoTrackerMainFragment extends Fragment {
                 dbModel.setEcoTrackerPath(year + "-" + (month + 1) + "-" + day);
                 dbModel.listTrackerValues(itemList, itemAdapter);
                 LocalData.calendarDate = new GregorianCalendar(year, month, day).getTimeInMillis();
+                LocalData.ETFootprintTotal = 0;
             }
         });
 
@@ -97,9 +101,19 @@ public class EcoTrackerMainFragment extends Fragment {
             }
         });
 
+        updateTotalEmission(itemList);
+
         return view;
     }
 
+    public static void updateTotalEmission(List<Item> itemList) {
+        LocalData.ETFootprintTotal = 0;
+        for (Item item : itemList) {
+            LocalData.ETFootprintTotal += Calculation.calculateFootprint(item.key, item.value);
+        }
+        if (textTotal == null) return;
+        textTotal.setText("Total: " + LocalData.ETFootprintTotal + " kg CO2");
+    }
     private void deleteSelected() {
         for (int i = 0; i < itemList.size(); i++) {
             Item item = itemList.get(i);
