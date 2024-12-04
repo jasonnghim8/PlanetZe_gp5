@@ -45,6 +45,9 @@
             android:name=".acf.ACFResults3"
             android:exported="true" />
         <activity
+            android:name=".acf.RecalACF"
+            android:exported="true" />
+        <activity
             android:name=".acf.CountrySelection"
             android:exported="true" />
         <activity
