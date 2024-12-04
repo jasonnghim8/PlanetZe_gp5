@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,6 +53,7 @@ public class StartFragment extends Fragment {
             }
         });
 
+        Toast.makeText(getContext(), "Don't Forget to log your habits!", Toast.LENGTH_LONG).show();
         return view;
     }
 

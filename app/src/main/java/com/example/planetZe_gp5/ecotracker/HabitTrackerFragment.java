@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ public class HabitTrackerFragment extends Fragment implements Observer {
     private HashMap<String, AverageFootprint> idToFootprint;
     private Chip impactChip, transportationChip, foodChip, consumptionChip;
     private final boolean[] includeCategory = {false, false, false};
+    private Button buttonLog;
 
     @Nullable
     @Override
@@ -44,6 +46,7 @@ public class HabitTrackerFragment extends Fragment implements Observer {
         foodChip = view.findViewById(R.id.chipFood);
         consumptionChip = view.findViewById(R.id.chipConsumption);
         recyclerView = view.findViewById(R.id.recyclerView);
+        buttonLog = view.findViewById(R.id.buttonLog);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         DataModel dbModel = DataModel.getInstance();
 
@@ -77,6 +80,18 @@ public class HabitTrackerFragment extends Fragment implements Observer {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 includeCategory[CONSUMPTION] = isChecked;
                 filterByCategory();
+            }
+        });
+
+        buttonLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (Habit habit : habitList) {
+                    if (habit.selected) {
+                        habit.logCount++;  // Increment the log count for selected habits
+                    }
+                }
+                habitAdapter.notifyDataSetChanged();  // Refresh the RecyclerView to display the updated counts
             }
         });
 

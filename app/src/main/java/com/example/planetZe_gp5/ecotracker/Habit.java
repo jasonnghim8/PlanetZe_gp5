@@ -3,7 +3,7 @@ package com.example.planetZe_gp5.ecotracker;
 public class Habit implements Comparable{
 
     public String name, description;
-    public int category;
+    public int category, logCount;;
     public double offsetValue;
     public double carbonFootprint;
     public boolean selected, visible;
@@ -16,9 +16,12 @@ public class Habit implements Comparable{
         this.carbonFootprint = carbonFootprint;
         this.replacedHabits = replacedHabits;
         offsetValue = carbonFootprint;
+        this.logCount = 0;
         visible = true;
         selected = false;
     }
+    public int getLogCount() { return logCount; }
+    public void setLogCount(int logCount) { this.logCount = logCount; }
 
     @Override
     public int compareTo(Object object) {

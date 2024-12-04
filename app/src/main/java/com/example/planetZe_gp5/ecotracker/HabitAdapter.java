@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.planetZe_gp5.R;
 
+import java.text.BreakIterator;
 import java.util.List;
 
 public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ItemViewHolder> {
@@ -36,11 +37,12 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ItemViewHold
         holder.textDescription.setText(habit.description);
         double roundedOffset = Math.round(habit.offsetValue * 100) / 100.0;
         holder.textOffset.setText(roundedOffset + " CO2");
+        holder.textLog.setText(String.valueOf(habit.logCount));
 
         holder.switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                habit.selected = isChecked;
+                habit.selected = isChecked;  // Update the selected state
             }
         });
     }
@@ -51,7 +53,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ItemViewHold
     }
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder {
-        TextView textName, textDescription, textOffset;
+        TextView textName, textDescription, textOffset, textLog;
         Switch switchButton;
 
         public ItemViewHolder(@NonNull View itemView) {
@@ -60,7 +62,7 @@ public class HabitAdapter extends RecyclerView.Adapter<HabitAdapter.ItemViewHold
             textDescription = itemView.findViewById(R.id.description);
             textOffset = itemView.findViewById(R.id.footprintOffset);
             switchButton = itemView.findViewById(R.id.switch1);
-
+            textLog = itemView.findViewById(R.id.textLog);
         }
     }
 }

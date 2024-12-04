@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.planetZe_gp5.DataModel;
 import com.example.planetZe_gp5.LocalData;
@@ -57,6 +58,7 @@ public class EcoTrackerAddItemFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 addItem();
+                loadFragment(new EcoTrackerMainFragment());
             }
         });
 
@@ -140,5 +142,12 @@ public class EcoTrackerAddItemFragment extends Fragment {
         }
         dbModel.writeEcoTrackerData(questionPath, text);
         Toast.makeText(getContext(), "Item added", Toast.LENGTH_SHORT).show();
+    }
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
