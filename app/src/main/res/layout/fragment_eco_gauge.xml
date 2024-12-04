@@ -1,0 +1,46 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- <?xml version="1.0" encoding="utf-8"?> -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".EcoGaugeFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <Button
+            android:id="@+id/testbutton"
+            android:layout_width="match_parent"
+            android:layout_height="120px"
+            android:text="data button" />
+
+        <TextView
+            android:id="@+id/total_emission"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/emission_placeholder"
+            android:layout_below="@id/testbutton" />
+
+        <Spinner
+            android:id="@+id/compare_with_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="120px"
+            android:layout_below="@id/total_emission"/>
+
+        <com.anychart.AnyChartView
+            android:id="@+id/pie_chart"
+            android:layout_width="match_parent"
+            android:layout_height="1200px"
+            android:layout_below="@+id/compare_with_spinner" />
+
+        <com.anychart.AnyChartView
+            android:id="@+id/line_chart"
+            android:layout_width="match_parent"
+            android:layout_height="700px"
+            android:layout_below="@id/pie_chart"/>
+
+    </RelativeLayout>
+</ScrollView>

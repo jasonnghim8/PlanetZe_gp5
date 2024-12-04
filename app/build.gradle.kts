@@ -50,4 +50,6 @@ dependencies {
     testImplementation(libs.monitor)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("com.github.AnyChart:AnyChart-Android:1.1.5")
 }

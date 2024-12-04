@@ -144,6 +144,14 @@
         <item>How many electronic devices (phones, laptops, etc.) have you purchased in the past year?</item>
         <item>How often do you recycle?</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string-array name="comparison_categories_array">
+        <item>None</item>
+        <item>National average</item>
+        <item>Global average</item>
+    </string-array>
+    <string name="emission_placeholder">Loading data...</string>
 
 </resources>
