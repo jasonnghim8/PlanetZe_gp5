@@ -71,3 +71,24 @@ After the registration, the app will have the following user flow:
 
 Added dependencies:
 One dependency is added for the card view for holding the pie chart. Another is added to compute the pie chart.
+
+Component: Eco tracker
+Instructions:
+1. Eco tracker main:
+   * Display tracked activities and allows to edit existing entries, delete entries and add new entries.
+   * Each entry is an instance of the items class and saved on the database under the user for that specific date when added.
+  
+2. Habit tracker:
+   * Predefined list of habits have been added. Extensible design allows to add more easily.
+   * Each habit has a carbonfootprint value which is compared to the user's average footprint per day for the replaced activities.
+
+Compnent: Data management
+1. DataModel:
+   * Handles interaction with the database.
+   * Allows to write values onto set paths or under the user path.
+   * Allows to read values and notify the caller using class Observer.
+  
+2. LocalData:
+   * Saves local data stored and accessed by many classes.
+   * All fields and methods are static.
+   * Most fields are final and do not change. Some are changed and have setter methods.
