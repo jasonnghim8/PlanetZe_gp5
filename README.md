@@ -1,3 +1,13 @@
+Component: login/registration
+The code for the registration and login pages is under the login_registration folder, and the code there is either 
+1) some redirects to other pages
+or
+2) validating and authenticating credentials
+The login module is divided into 
+Model (LoginModel.java):  handles connecting to the database
+View (LoginActivity.java): the UI for the pages 
+Presenter (LoginPresenter.java): validates the credentials and changes the view accordingly
+
 Component: ACF (Annual Carbon Footprint)
 Instructions:
 After the registration, the app will have the following user flow:
