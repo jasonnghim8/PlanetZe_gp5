@@ -25,7 +25,7 @@
             android:layout_height="226dp"
             android:gravity="center"
             android:background="@color/grey"
-            android:textSize="32sp"
+            android:textSize="30sp"
             android:textColor="@color/black"
             android:text="@string/waiting" />
 

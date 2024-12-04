@@ -1,5 +1,6 @@
 package com.example.planetZe_gp5.ecotracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.planetZe_gp5.DataModel;
+import com.example.planetZe_gp5.EcoHubActivity;
 import com.example.planetZe_gp5.LocalData;
+import com.example.planetZe_gp5.MainActivity;
 import com.example.planetZe_gp5.R;
 
 import java.text.SimpleDateFormat;
@@ -29,7 +32,7 @@ import java.util.Locale;
 
 public class EcoTrackerMainFragment extends Fragment {
     ImageButton buttonAdd, buttonDelete;
-    Button buttonSave, buttonHabitTracker;
+    Button buttonSave, buttonHabitTracker, buttonBack;
     static TextView textTotal;
     CalendarView calendarView;
     DataModel dbModel;
@@ -50,6 +53,7 @@ public class EcoTrackerMainFragment extends Fragment {
         buttonSave = view.findViewById(R.id.buttonSave);
         calendarView = view.findViewById(R.id.calendarView);
         buttonHabitTracker = view.findViewById(R.id.buttonHabitTracker);
+        buttonBack = view.findViewById(R.id.buttonBack);
 
         itemList = new ArrayList<>();
         itemAdapter = new ItemAdapter(itemList);
@@ -98,6 +102,15 @@ public class EcoTrackerMainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 loadFragment(new HabitTrackerFragment());
+            }
+        });
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                startActivity(intent);
             }
         });
 
