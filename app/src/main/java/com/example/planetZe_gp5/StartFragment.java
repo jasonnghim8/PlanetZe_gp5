@@ -23,7 +23,7 @@ public class StartFragment extends Fragment {
 
         Button buttonEcoTracker = view.findViewById(R.id.buttonEcotracker);
         Button buttonACF = view.findViewById(R.id.buttonACF);
-        Button buttonLogin = view.findViewById(R.id.buttonLogin);
+        Button buttonEcoHub = view.findViewById(R.id.buttonEcoHub);
         Button buttonEcoGauge = view.findViewById(R.id.buttonEcoGauge);
 
         buttonEcoTracker.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +37,15 @@ public class StartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ACFWelcome.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+                startActivity(intent);
+            }
+        });
+
+        buttonEcoHub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), EcoHubActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
                 startActivity(intent);
             }

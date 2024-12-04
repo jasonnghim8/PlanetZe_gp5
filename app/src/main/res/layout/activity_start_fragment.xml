@@ -8,43 +8,61 @@
     tools:layout_editor_absoluteY="42dp">
 
     <Button
-        android:id="@+id/buttonEcotracker"
-        android:layout_width="404dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="28dp"
-        android:text="ecotracker"
+        android:id="@+id/buttonEcoHub"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/navy"
+        android:text="@string/buttonEcoHub"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/buttonACF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonACF" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonEcoGauge" />
 
     <Button
-        android:id="@+id/buttonACF"
-        android:layout_width="404dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="248dp"
-        android:text="@string/buttonACF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/buttonEcotracker"
+        android:layout_width="411dp"
+        android:layout_height="183dp"
+        android:background="@color/navy"
+        android:text="@string/buttonEcoTracker"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonEcoGauge"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-1dp" />
 
     <Button
         android:id="@+id/buttonEcoGauge"
-        android:layout_width="404dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/navy"
         android:text="@string/buttonEcoGauge"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/buttonEcoHub"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
-
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="404dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/buttonLogin"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonEcotracker" />
+
+    <Button
+        android:id="@+id/buttonACF"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/navy"
+        android:text="@string/buttonACF"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonEcoHub" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
