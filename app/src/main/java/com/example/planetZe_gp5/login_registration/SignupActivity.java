@@ -15,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.planetZe_gp5.LocalData;
 import com.example.planetZe_gp5.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -74,6 +75,7 @@ public class SignupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(SignupActivity.this, "Signup Successful!", Toast.LENGTH_SHORT).show();
+                            LocalData.setUserid(email.substring(0, email.indexOf("@")));
                             startActivity(new Intent(SignupActivity.this, FirstTimeUserSetup.class));
                         }
                         else{
