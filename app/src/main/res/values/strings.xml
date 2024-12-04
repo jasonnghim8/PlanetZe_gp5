@@ -3,8 +3,13 @@
     <string name="buttonACF">ACF Select Country</string>
     <string name="buttonLogin">Login</string>
     <string name="buttonEcoGauge">Eco Gauge</string>
+    <string name="buttonEcoTracker">Eco Tracker</string>
+    <string name="buttonEcoHub">Eco Hub</string>
     <string name="continued">continue</string>
     <string name="start">get started</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="recalculate">Do you want to recalculate your annual carbon footprint?</string>
     <string name="welcome">Welcome to PlanetZe!\nLet\'s get started!</string>
     <string name="welcomeMessage">We will calculate your annual carbon footprint based on
     your lifestyles.\nYou only need to do this once!</string>

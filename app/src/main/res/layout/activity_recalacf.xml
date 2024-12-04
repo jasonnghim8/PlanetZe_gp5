@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/navy">
+
+    <TextView
+        android:id="@+id/recalculate"
+        android:layout_width="331dp"
+        android:layout_height="283dp"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:text="@string/recalculate"
+        android:textColor="@color/grey"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="40dp" />
+
+    <Button
+        android:id="@+id/cancel_recal"
+        android:layout_width="126dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="84dp"
+        android:text="@string/no"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/recalculate"
+        tools:layout_editor_absoluteX="33dp" />
+
+    <Button
+        android:id="@+id/confirm_recal"
+        android:layout_width="114dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="87dp"
+        android:text="@string/yes"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/recalculate"
+        tools:layout_editor_absoluteX="257dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
