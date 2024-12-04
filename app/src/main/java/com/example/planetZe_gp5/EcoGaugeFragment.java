@@ -163,7 +163,7 @@ public class EcoGaugeFragment extends Fragment implements Observer {
         cartesian.legend().padding(0d, 0d, 10d, 0d);
 
         // horizontal line
-        cartesian.annotations().horizontalLine(horizontalLinePos).valueAnchor(String.valueOf(Calculation.getInstance().totalCF));
+        cartesian.annotations().horizontalLine("").valueAnchor(String.valueOf(Calculation.getInstance().totalCF));
 
         anyChartView_line.setChart(cartesian);
     }
@@ -172,20 +172,18 @@ public class EcoGaugeFragment extends Fragment implements Observer {
         // Credit: example code
         // https://github.com/AnyChart/AnyChart-Android/blob/master/sample/src/main/java/com/anychart/sample/charts/PieChartActivity.java
 
-        // AnyChartView anyChartView_pie = getView().findViewById(R.id.pie_chart);
+        // define pie chart
         anyChartView_pie = getView().findViewById(R.id.pie_chart);
 
         APIlib.getInstance().setActiveAnyChartView(anyChartView_pie);
 
         // anyChartView_pie.clear();
-
-        // draw pie chart
         pie = AnyChart.pie();
 
         // data to plot
         List<DataEntry> data = new ArrayList<>();
 
-        // hopefully ignored
+        // populate pie chart data
         emission_categories.add(new ValueDataEntry("Consumption", Calculation.getInstance().consumptionCF));
         emission_categories.add(new ValueDataEntry("Food", Calculation.getInstance().foodCF));
         emission_categories.add(new ValueDataEntry("Housing", Calculation.getInstance().housingCF));
@@ -198,6 +196,7 @@ public class EcoGaugeFragment extends Fragment implements Observer {
 
         pie.data(data);
 
+        // pie chart options
         pie.title("Emissions Breakdown by Category");
 
         pie.labels().position("outside");
