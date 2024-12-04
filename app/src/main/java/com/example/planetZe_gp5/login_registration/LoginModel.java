@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.planetZe_gp5.LocalData;
 import com.example.planetZe_gp5.MainActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,6 +27,7 @@ public class LoginModel {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
+                        LocalData.setUserid(email.substring(0, email.indexOf("@")));
                         Toast.makeText(loginContext, "Login Successful!", Toast.LENGTH_SHORT).show();
                         loginContext.startActivity(new Intent(loginContext, MainActivity.class));
                     }
