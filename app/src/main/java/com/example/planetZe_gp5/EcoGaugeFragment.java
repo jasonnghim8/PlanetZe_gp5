@@ -55,15 +55,8 @@ public class EcoGaugeFragment extends Fragment implements Observer {
     static String testVar;
     ArrayList<String> totalEmissionArray; // Total emission
     ArrayList<String> CAPCarray; // CountryAnnualPerCapita
-    ArrayList<String> UsersCategoryACFarray; // User's ACF by category
-    ArrayList<String> UsersACFarray; // User's ACFs in a (?)day
-    // Consumption, Food, Housing, transportation
     ArrayList<ValueDataEntry> emission_categories = new ArrayList<>();
-
-    ArrayList<DataEntry> dt = new ArrayList<>();
-    // ArrayList<String>[] emission_values = new ArrayList<String>[4];
-
-    AnyChartView anyChartView_pie;  // for refreshing pie chart
+    AnyChartView anyChartView_pie;
     Pie pie;
     Set set;  // for refreshing line chart
 
@@ -85,33 +78,14 @@ public class EcoGaugeFragment extends Fragment implements Observer {
 
     public void extractData(){
         dbModel = DataModel.getInstance();
-
-        ArrayList<String> datalist = new ArrayList<>();
-
         dbModel.readValue("CountryAnnualPerCapita", this);
-//        CAPCarray = datalist;
 
+        // value provided in other classes:
         // A) Total carbon emission
-//        datalist = new ArrayList<>();
-//        dbModel.readValue("Users/test/annualCarbonFootprint/total", datalist);
-//        totalEmissionArray = datalist;
 
         // B) Emission by category
-//        datalist = new ArrayList<>();
-//        dbModel.readValue("Users/test/annualCarbonFootprint/Consumption", datalist);
-//        dbModel.readValue("Users/test/annualCarbonFootprint/Food", datalist);
-//        dbModel.readValue("Users/test/annualCarbonFootprint/Housing", datalist);
-//        dbModel.readValue("Users/test/annualCarbonFootprint/transportation", datalist);
-//        UsersCategoryACFarray = datalist;
 
-        // C) Emission trend
-//        datalist = new ArrayList<>();
-//        // dbModel.readValue("");
-//        // TODO: why 24 values
-//        for (int i = 0; i < 24; ++i) {
-//            dbModel.readValue("Users/test/annualCarbonFootprint/" + String.valueOf(i + 1), datalist);
-//        }
-//        UsersACFarray = datalist;
+        // C) Emission trend (?)
     }
 
     @Override
@@ -162,7 +136,7 @@ public class EcoGaugeFragment extends Fragment implements Observer {
 
         List<DataEntry> seriesData = new ArrayList<>();
         for (int i = 0; i < 24; ++i) {
-            seriesData.add(new ValueDataEntry(String.valueOf(i + 1),2.8));
+            seriesData.add(new ValueDataEntry(String.valueOf(i + 1),Calculation.getInstance().totalCF));
         }
 
 
@@ -255,8 +229,7 @@ public class EcoGaugeFragment extends Fragment implements Observer {
         addLineChart("", true);
 
         TextView ttl_emiss = getView().findViewById(R.id.total_emission);
-        testVar = UsersCategoryACFarray.get(0);
-        ttl_emiss.setText("Output: " + testVar);
+        //ttl_emiss.setText("Total emission: " + String.valueOf());
 
         // testVar = String.valueOf(UsersACFarray.size());
         // testVar = String.valueOf(emission_categories.size());
@@ -266,10 +239,7 @@ public class EcoGaugeFragment extends Fragment implements Observer {
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testVar = UsersCategoryACFarray.get(0);
-                ttl_emiss.setText("Output: " + testVar);
             }
-
         });
 
         // comparison selector
@@ -283,8 +253,10 @@ public class EcoGaugeFragment extends Fragment implements Observer {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String s = "Total Emission: " + String.valueOf(
-                        Math.round(Double.parseDouble(totalEmissionArray.get(0)) * 100) / 100.0
-                ) + " kg CO2e"; /*
+                        Math.round(Calculation.getInstance().totalCF * 100) / 100.0
+                ) + " kg CO2e";
+                ttl_emiss.setText(s);
+                /*
                   + String.valueOf(UsersCategoryACFarray.get(0))
                   + String.valueOf(UsersCategoryACFarray.get(1))
                   + String.valueOf(UsersCategoryACFarray.get(2))
@@ -314,6 +286,7 @@ public class EcoGaugeFragment extends Fragment implements Observer {
                     anyChartView_pie.setChart(pie); */
 
 
+                    // Could not reload chart according to arguments
                     addPieChart();
                     addLineChart("2.0", false);
                 } else if (selection.equals("National average")) {
