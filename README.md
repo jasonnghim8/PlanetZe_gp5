@@ -1,3 +1,6 @@
+NOTICE: We cannot merge the eco gauge into the main branch, so it is stored in a separate zip file in the zip file. 
+All other activities and functions are in the main file.
+
 Component: login/registration
 The code for the registration and login pages is under the login_registration folder, and the code there is either 
 1) some redirects to other pages
